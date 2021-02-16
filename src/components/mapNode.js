@@ -5,7 +5,10 @@ export const NodeContainer = styled.div `
   margin: 10px;
   width: 48px;
   height: 48px;
-
+  position: relative;
+  left: ${props => props.x}px;
+  top: ${props => props.y}px;
+}
 `
 
 export const ButtonCircle = styled.div `
@@ -14,33 +17,40 @@ export const ButtonCircle = styled.div `
     border-radius: 50%;
     overflow: hidden;
     background: #EFEFEF;
-    border: 7px solid white; 
+    background-image: url(${props => props.img});
+    background-size: cover;
+    border: 5px solid white; 
     box-sizing: border-box;
     box-shadow: 0 3px 4px grey;
 `
 
 export const ButtonText = styled.div `
-    display:block;
-    float:left;
-    // width:100%;
-    // padding-top:50%;
-    // padding-bottom:50%;
-    // line-height:1em;
-    // margin-top:-0.5em;
-          
-    // text-align:center;
-    // color:#e2eaf3;
-    // font-family:Verdana;
-    // font-size:1.2em;
-    // font-weight:bold;
-    // text-decoration:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 `
 
 
 
 const MapNode = ({ id }) => {
-  return <NodeContainer key={id}>
-      <ButtonCircle>
+    //SIN CURVES YEAH
+    const strength = 90;
+    const xPosition = Math.sin(id) * strength;
+
+    //MOD MATH for spacing down
+    var yPosition = 0;
+    const shift = id - 1;
+    const modulo = 3
+    const yPositionNumber = shift % modulo
+
+    if(yPositionNumber == 0) {
+        yPosition = 15;
+    }
+
+  return <NodeContainer x={xPosition} y={yPosition} key={id}>
+      <ButtonCircle img="https://cdn.discordapp.com/attachments/336008480022593536/810745699436199956/c7txq9iogih61.png">
           <ButtonText>
               {id}
           </ButtonText>
