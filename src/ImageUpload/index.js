@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { db } from "../../config";
+import { storage } from "../config";
 
+// Credit to Github user @ClintPy for Image-Uploader-React-Firebase
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,8 @@ class ImageUpload extends Component {
 
   handleUpload = () => {
     const { image } = this.state;
-    const uploadTask = db.ref(`images/` + `whatever`).put(image);
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    console.log(image.name);
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -36,7 +38,8 @@ class ImageUpload extends Component {
       },
       () => {
         // complete function ...
-        db.ref("images")
+        storage
+          .ref("images")
           .child(image.name)
           .getDownloadURL()
           .then((url) => {

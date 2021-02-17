@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import TestList from "./components/test-list";
-import ImageUpload from "./components/ImageUpload/index";
+import ImageUpload from "./ImageUpload/index";
 
 function App() {
   return (
