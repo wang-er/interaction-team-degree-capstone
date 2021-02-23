@@ -8,6 +8,7 @@ export const NavigationWrapper = styled.div`
     flex-direction: column;
     left: 0;
     top: 0;
+    z-index: 1000;
 `
 export const MenuGroup = styled.div`
     max-width: ${ props => (props.isOpen ? '70vw': '0vw')};

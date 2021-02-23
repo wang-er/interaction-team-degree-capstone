@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import MapNode from "./mapNode";
+import { db } from '../config';
 
 export const MapContainer = styled.div`
     display: flex;
@@ -9,10 +10,26 @@ export const MapContainer = styled.div`
 `
 
 
+
+
 //functional components?
 const Map = () => {
     const [mapNodeList, setMapNodeList] = React.useState([]);
     const [node, setNode] = useState(1);
+
+    useEffect(() => {
+        db.ref('challenges/').on('value', snapshot => {
+            const message = snapshot.val();
+            console.log(message)
+
+            const testArray = [];
+            for (var key in message) {
+                testArray.push({ id: key, object: message[key] });
+            }
+            console.log(testArray)
+
+        });
+    }, []);
 
     const saveNodes = () => {
         console.log(mapNodeList);

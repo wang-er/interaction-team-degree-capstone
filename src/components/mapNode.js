@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 export const NodeContainer = styled.div `
-  margin: 10px;
+  margin: 20px;
   width: 48px;
   height: 48px;
   position: relative;
@@ -37,17 +37,12 @@ export const ButtonText = styled.div `
 const MapNode = ({ id }) => {
     //SIN CURVES YEAH
     const strength = 90;
-    const xPosition = Math.sin(id) * strength;
-
-    //MOD MATH for spacing down
+    const curveStrength = 0.4;
+    const xPosition = Math.sin(id/(curveStrength*Math.PI)) * strength;
     var yPosition = 0;
-    const shift = id - 1;
-    const modulo = 3
-    const yPositionNumber = shift % modulo
 
-    if(yPositionNumber == 0) {
-        yPosition = 15;
-    }
+    //Map node is given id content data, so not just id, but also on the database
+    // 
 
   return <NodeContainer x={xPosition} y={yPosition} key={id}>
       <ButtonCircle img="https://cdn.discordapp.com/attachments/336008480022593536/810745699436199956/c7txq9iogih61.png">
