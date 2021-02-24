@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import MapNode from "./mapNode";
 import { db } from '../config';
@@ -8,62 +8,68 @@ export const MapContainer = styled.div`
     flex-direction: column-reverse;
     align-items: center;
 `
-
-
+export const Modal = styled.div`
+    z-index: 10000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: grey;
+    height: 100vh;
+    width: 100vw;
+    display: ${props => (props.isOpen ? "flex" : "none")}
+`
 
 
 //functional components?
-const Map = () => {
+const Map = ({ data }) => {
     const [mapNodeList, setMapNodeList] = React.useState([]);
-    const [node, setNode] = useState(1);
+    const [isLoaded, setIsLoaded] = React.useState(false)
 
     useEffect(() => {
-        db.ref('challenges/').on('value', snapshot => {
-            const message = snapshot.val();
-            console.log(message)
-
-            const testArray = [];
-            for (var key in message) {
-                testArray.push({ id: key, object: message[key] });
-            }
-            console.log(testArray)
-
-        });
+        console.log(data);
+        if (data !== undefined) {
+            db.ref('entries/').orderByChild('challengeID').equalTo(data.id).on('value', snapshot => {
+                const entries = snapshot.val();
+                sortExistingEntries(entries); //how to escape from on? or keep it?
+                setIsLoaded(true);
+            });
+        }
     }, []);
 
-    const saveNodes = () => {
-        console.log(mapNodeList);
+    const sortExistingEntries = (existingEntries) => {
+        var entriesList = [];
+        //first get the entries  into alist
+        for (var key in existingEntries) {
+            entriesList.push({ id: key, object: existingEntries[key] });
+        }
+        entriesList.sort((a, b) => (Date.parse(a.object.date) > Date.parse(b.object.date)) ? 1 :
+            ((Date.parse(b.object.date) > Date.parse(a.object.date)) ? -1 : 0))
+
+        console.log(entriesList)
+        generateNodeList(entriesList);
     }
 
-
-    //send text vals
-    const submitValue = () => {
-        const dayArray = [];
-        for (var i = 0; i < node; i++) {
-            dayArray.push(i);
+    const generateNodeList = (givenEntries) => {
+        var entriesList = [];
+        //for values w/o entries first, uncompleted days
+        for (var i = 0; i < data.totalDays; i++) {
+            entriesList.push({ "id": i, "object": undefined });
         }
-        setMapNodeList(dayArray);
-        setNode(1);
-        saveNodes();
-      }
-      
-    // const addNode = () => {
-    //     const tempArray = Object.assign([], mapNodeList);
-    //     tempArray.push("f");
-    //     setMapNodeList(tempArray);
-    //     saveNodes();
-    //   }
+
+        //then replace with ones w/ data?
+        for (var j = 0; j < givenEntries.length; j++) {
+            entriesList[j] = { "id": j, "object": givenEntries[j].object };
+        }
+        console.log(entriesList)
+        setMapNodeList(entriesList)
+    }
 
     //rendering
     return <>
-        <input type="number" value={node} onChange={e => setNode(e.target.value)} />
-        <button onClick={submitValue}>Add nodes</button>
-        {/* <button onClick={addNode}>Add another node!</button> */}
-
         <MapContainer>
-            {mapNodeList.map((node) => {
+            {isLoaded && mapNodeList.map((node) => {
                 return (
-                    <MapNode id={node}/>
+                    <MapNode data={node} />
                 )
             })}
         </MapContainer>

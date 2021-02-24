@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components"
 
@@ -11,7 +11,7 @@ export const NavigationWrapper = styled.div`
     z-index: 1000;
 `
 export const MenuGroup = styled.div`
-    max-width: ${ props => (props.isOpen ? '70vw': '0vw')};
+    max-width: ${props => (props.isOpen ? '70vw' : '0vw')};
     transition: all 0.5s;
     overflow: hidden;
     background-color: white;
@@ -56,51 +56,51 @@ export const HamburgerIcon = styled.img`
 `
 
 const Navigation = () => {
-    const [open, setIsOpen] = React.useState(false);
-    const toggle = () => setIsOpen(!open);
+  const [open, setIsOpen] = React.useState(false);
+  const toggle = () => setIsOpen(!open);
 
-    return (
-        <NavigationWrapper>
-        <HamburgerIcon src={'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/hamburger.png'} onClick={toggle}/>
-        <MenuGroup isOpen={open}>
-            <MenuButton>
-                <Link to="/">
-                    Create New Challenge
+  return (
+    <NavigationWrapper>
+      <HamburgerIcon src={'https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/hamburger.png'} onClick={toggle} />
+      <MenuGroup isOpen={open}>
+        <MenuButton>
+          <Link to="/">
+            Create New Challenge
               </Link>
-            </MenuButton>
-            <MenuItem>
-                <Link to="/">
-                    Home
+        </MenuButton>
+        <MenuItem>
+          <Link to="/">
+            Home
               </Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/map">
-                    Map
+        </MenuItem>
+        <MenuItem>
+          <Link to="/map">
+            Map
               </Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/account">
-                    Account
+        </MenuItem>
+        <MenuItem>
+          <Link to="/account">
+            Account
               </Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/faq">
-                    FAQ
+        </MenuItem>
+        <MenuItem>
+          <Link to="/faq">
+            FAQ
               </Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/settings">
-                    Settings
+        </MenuItem>
+        <MenuItem>
+          <Link to="/settings">
+            Settings
               </Link>
-            </MenuItem>
-            <MenuItem>
-                <Link to="/logout">
-                    Logout
+        </MenuItem>
+        <MenuItem>
+          <Link to="/logout">
+            Logout
               </Link>
-            </MenuItem>
-        </MenuGroup>
-        </NavigationWrapper>
-    );
+        </MenuItem>
+      </MenuGroup>
+    </NavigationWrapper>
+  );
 };
 
 export default Navigation

@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 class FAQPage extends React.Component {
   render() {
     return (
-      <Layout location={this.props.location}>
+      <Layout>
         <div style={{ background: '#fff' }}>
             FAQ
         </div>
