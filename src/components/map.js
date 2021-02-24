@@ -53,13 +53,18 @@ const Map = ({ data }) => {
         var entriesList = [];
         //for values w/o entries first, uncompleted days
         for (var i = 0; i < data.totalDays; i++) {
-            entriesList.push({ "id": i, "object": undefined });
+            entriesList.push({ "id": i, "object": { challengeID: data.id }, "state": "future" });
         }
 
         //then replace with ones w/ data?
         for (var j = 0; j < givenEntries.length; j++) {
-            entriesList[j] = { "id": j, "object": givenEntries[j].object };
+            entriesList[j] = { "id": j, "object": givenEntries[j].object,  "state": "past" };
         }
+
+        if(data.totalDays > givenEntries.length) {
+            entriesList[givenEntries.length] ={ "id": givenEntries.length, "object": { challengeID: data.id }, "state": "current" };
+        }
+
         console.log(entriesList)
         setMapNodeList(entriesList)
     }
