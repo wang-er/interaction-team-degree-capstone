@@ -1,6 +1,6 @@
-
 import './App.css';
 import TestList from './components/test-list'
+import ImageUpload from "./ImageUpload/index";
 import MapPage from './pages/map-screen'
 import HomePage from './pages/home'
 import React, { useEffect, useState } from "react";
@@ -65,7 +65,8 @@ function App() {
             <FAQPage />
           </Route>
           <Route path="/settings">
-            <SettingsPage />
+            <TestList />
+            <ImageUpload />
           </Route>
           <Route path="/">
             <HomePage onMapUpdate={updateMap} user={user} />
