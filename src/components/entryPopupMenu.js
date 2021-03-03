@@ -1,7 +1,5 @@
 import React from "react";
 import { storage } from "../config";
-// import Modal from "./mapNode";
-import ModalImg from "./mapNode";
 import EntryUpload from "./entryUpload";
 
 import {
@@ -14,19 +12,7 @@ import {
   PopoverArrow,
   PopoverCloseButton,
   Button,
-  Flex,
   Stack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  // Button,
-  useDisclosure,
-  Lorem,
-  Textarea,
 } from "@chakra-ui/react";
 
 // const toggleUploadModal = false;
@@ -34,15 +20,7 @@ import {
 class EntryPopupMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: props.key,
-      caption: props.caption,
-      fileType: props.fileType,
-      fileURL: "",
-      nodeType: props.nodeType,
-      image: null,
-      // toggleUploadModal: false,
-    };
+    this.state = {};
   }
 
   handleChange = (e) => {
@@ -88,7 +66,7 @@ class EntryPopupMenu extends React.Component {
       <>
         <Popover>
           <PopoverTrigger>
-            <Button>New entry</Button>
+            <Button>+</Button>
           </PopoverTrigger>
           <PopoverContent width="200px">
             <PopoverHeader>Document!</PopoverHeader>
@@ -110,7 +88,10 @@ class EntryPopupMenu extends React.Component {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <EntryUpload />
+        <EntryUpload
+          challengeID={this.props.challengeID}
+          entryID={this.props.entryID}
+        />
       </>
     );
   }

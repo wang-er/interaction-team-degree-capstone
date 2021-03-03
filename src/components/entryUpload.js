@@ -9,56 +9,68 @@ import {
   ModalCloseButton,
   Button,
   useDisclosure,
-  Lorem,
-  Image,
   Textarea,
   Text,
 } from "@chakra-ui/react";
 import styled from "styled-components";
-import { storage } from "../config";
+import { db } from "../config";
 import ImageUpload from "./imageUpload";
 
-// export const PhotoDisplay = styled.div`
-//   width: 400px;
-//   height: 400px;
-//   border-radius: 50%;
-//   overflow: hidden;
-//   background: gray;
-//   background-size: cover;
-// `;
-
-function EntryUpload() {
-  let [value, setValue] = React.useState("");
+function EntryUpload(props) {
+  // let [value, setValue] = React.useState("");
+  let [imgUrl, setImgUrl] = React.useState("");
+  let [caption, setCaption] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [image, setImage] = React.useState(null);
-  const [imageUrl, setImageUrl] = React.useState("");
 
+  // used for text area caption
   let handleInputChange = (e) => {
     let inputValue = e.target.value;
-    setValue(inputValue);
+    setCaption(inputValue);
+  };
+
+  //  ImageUpload is a child component of EntryUpload. This function is used to send the image URL from child
+  // to parent.
+  const sendDataToParent = (obj) => {
+    // the callback. Use a better name
+    console.log("sendDataToParent: " + { obj });
+    console.log(JSON.stringify(obj));
+
+    const url = JSON.stringify(obj);
+    setImgUrl(url);
+    console.log("imgUrl is: " + imgUrl);
+  };
+
+  // Create official entry object and send to Firebase
+  const sendEntryToFirebase = () => {
+    db.ref("entries/" + props.entryID).set({
+      id: props.entryID,
+      caption: caption,
+      imgUrl: imgUrl,
+      challengeID: props.challengeID,
+    });
   };
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>Upload Media</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ImageUpload></ImageUpload>
+          <ImageUpload sendDataToParent={sendDataToParent}></ImageUpload>
           <ModalHeader>Add a Caption</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {/* <Text mb="8px">Value: {value}</Text> */}
             <Textarea
-              value={value}
+              value={caption}
               onChange={handleInputChange}
               placeholder="Here is a sample placeholder"
               size="sm"
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="green" onClick={onClose}>
+            <Button colorScheme="green" onClick={sendEntryToFirebase}>
               Save
             </Button>
             {/* <Button variant="ghost">Secondary Action</Button> */}

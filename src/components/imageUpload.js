@@ -7,10 +7,15 @@ class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
+      image: "",
       url: "",
       progress: 0,
+      captionInput: "",
     };
+  }
+
+  sendURLtoEntryUpload(imgUrl) {
+    this.props.sendData(imgUrl);
   }
 
   handleChange = (e) => {
@@ -48,15 +53,15 @@ class ImageUpload extends Component {
           });
       }
     );
+    // send image url to parent component (EntryUpload)
+    this.props.sendDataToParent(this.state.url);
+    console.log("poo");
   };
 
-  render() {
+  render(props) {
     return (
       <>
-        <Image
-          src={this.state.url || "https://via.placeholder.com/150"}
-          fallbackSrc="https://via.placeholder.com/150"
-        />
+        <Image src={this.state.url || "https://via.placeholder.com/150"} />
         {console.log(this.state.url)}
         <input type="file" id="file-upload" onChange={this.handleChange} />
         <Button

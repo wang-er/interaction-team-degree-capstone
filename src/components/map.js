@@ -90,7 +90,7 @@ const Map = ({ data }) => {
       <MapContainer>
         {isLoaded &&
           mapNodeList.map((node) => {
-            return <MapNode data={node} />;
+            return <MapNode data={node} challengeID={data.id} />;
           })}
       </MapContainer>
     </>

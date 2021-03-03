@@ -74,9 +74,10 @@ export const ModalContent = styled.div`
 
 export const ModalImg = styled.img`
   width: 80%;
+  height: 80%;
 `;
 
-const MapNode = ({ data }) => {
+const MapNode = ({ data, challengeID }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   //SIN CURVES YEAH
@@ -101,15 +102,14 @@ const MapNode = ({ data }) => {
       key={data.id}
       onClick={toggleModal}
     >
-      {data.state === "current" && <EntryPopupMenu></EntryPopupMenu>}
-      <ButtonCircle
-        state={data.state}
-        img={
-          hasData
-            ? "https://cdn.discordapp.com/attachments/336008480022593536/810745699436199956/c7txq9iogih61.png"
-            : ""
-        }
-      >
+      {data.state === "current" && (
+        // ask erin if data.id is challenge id
+        <EntryPopupMenu
+          challengeID={challengeID}
+          entryID={data.id}
+        ></EntryPopupMenu>
+      )}
+      <ButtonCircle state={data.state} img={hasData ? data.object.imgUrl : ""}>
         <ButtonText>
           {data.id}
           {hasData && <div>{data.object.caption}</div>}
@@ -120,7 +120,7 @@ const MapNode = ({ data }) => {
         //how to make this a single modal? refactor to be instead hasData to just, the state of a node?
         hasData && (
           <Modal isOpen={isOpen}>
-            <ModalImg src="https://cdn.discordapp.com/attachments/336008480022593536/810745699436199956/c7txq9iogih61.png" />
+            <ModalImg src={data.object.imgUrl} />
             <ModalContent>{data.object.caption}</ModalContent>
           </Modal>
         )
