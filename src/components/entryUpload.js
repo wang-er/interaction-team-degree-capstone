@@ -17,7 +17,6 @@ import { db } from "../config";
 import ImageUpload from "./imageUpload";
 
 function EntryUpload(props) {
-  // let [value, setValue] = React.useState("");
   let [imgUrl, setImgUrl] = React.useState("");
   let [caption, setCaption] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,11 +32,12 @@ function EntryUpload(props) {
   const sendDataToParent = (obj) => {
     // the callback. Use a better name
     console.log("sendDataToParent: " + { obj });
-    console.log(JSON.stringify(obj));
 
-    const url = JSON.stringify(obj);
-    setImgUrl(url);
-    console.log("imgUrl is: " + imgUrl);
+    const url = JSON.stringify(obj.url);
+    // remove unwanted slashes in front and back of String before we set it as img url and store it in firebase
+    var result = url.substring(1, url.length - 1);
+    setImgUrl(result);
+    console.log("imgUrl is: " + result);
   };
 
   // Create official entry object and send to Firebase
@@ -73,7 +73,6 @@ function EntryUpload(props) {
             <Button colorScheme="green" onClick={sendEntryToFirebase}>
               Save
             </Button>
-            {/* <Button variant="ghost">Secondary Action</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

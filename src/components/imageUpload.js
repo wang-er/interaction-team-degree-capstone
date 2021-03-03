@@ -25,6 +25,7 @@ class ImageUpload extends Component {
     }
   };
 
+  // uploads photo to firebase STORAGE
   handleUpload = () => {
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -50,12 +51,11 @@ class ImageUpload extends Component {
           .getDownloadURL()
           .then((url) => {
             this.setState({ url });
+            // send image url to entryUpload parent here
+            this.props.sendDataToParent({ url });
           });
       }
     );
-    // send image url to parent component (EntryUpload)
-    this.props.sendDataToParent(this.state.url);
-    console.log("poo");
   };
 
   render(props) {

@@ -73,8 +73,7 @@ export const ModalContent = styled.div`
 `;
 
 export const ModalImg = styled.img`
-  width: 80%;
-  height: 80%;
+  width: 30%;
 `;
 
 const MapNode = ({ data, challengeID }) => {
