@@ -69,7 +69,7 @@ const Navigation = () => {
               </Link>
         </MenuButton>
         <MenuItem>
-          <Link to="/">
+          <Link to="/home">
             Home
               </Link>
         </MenuItem>

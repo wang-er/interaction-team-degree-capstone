@@ -14,6 +14,11 @@ import AccountPage from './pages/account';
 import FAQPage from './pages/faq';
 import SettingsPage from './pages/settings';
 import { db } from './config';
+import LandingPage from './pages/landing';
+import OnboardingPage from './pages/onboarding';
+import CreateAccountPage from './pages/new-user';
+import CreateAccountDetailsPage from './pages/create-account';
+import LoginPage from './pages/login';
 
 function App() {
 
@@ -53,8 +58,22 @@ function App() {
   return (<> {isLoaded &&
     <Router>
       <div>
-        <Navigation />
         <Switch>
+        <Route path="/landing">
+            <LandingPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/onboarding">
+            <OnboardingPage/>
+          </Route>
+          <Route path="/create-account">
+            <CreateAccountPage/>
+          </Route>
+          <Route path="/create-account-details">
+            <CreateAccountDetailsPage/>
+          </Route>
           <Route path="/map">
             <MapPage ID={currentMapID} />
           </Route>
@@ -68,8 +87,11 @@ function App() {
             <TestList />
             <ImageUpload />
           </Route>
-          <Route path="/">
+          <Route path="/home">
             <HomePage onMapUpdate={updateMap} user={user} />
+          </Route>
+          <Route path="/">
+            <LandingPage/>
           </Route>
         </Switch>
       </div>

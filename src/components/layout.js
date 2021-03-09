@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
+import Navigation from './navigation'
 
 
 
@@ -13,16 +14,20 @@ export const Container = styled.div`
   padding-top: 50px;
 `
 const Layout = ({ children }) => {
-    return (
+  return (
+    <>
+      <Navigation />
       <LayoutDiv>
-      <Container>
-        <div>
-        {children}
-        </div>
-      </Container>
+
+        <Container>
+          <div>
+            {children}
+          </div>
+        </Container>
       </LayoutDiv>
-    )
-  }
+    </>
+  )
+}
 
 
 export default Layout
