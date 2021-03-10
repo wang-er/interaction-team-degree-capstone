@@ -1,21 +1,19 @@
 import React from "react";
 import { storage } from "../config";
 import EntryUpload from "./entryUpload";
-
+import TextUpload from "./textUpload";
+import CameraUpload from "./cameraUpload";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
   Button,
   Stack,
 } from "@chakra-ui/react";
-
-// const toggleUploadModal = false;
 
 class EntryPopupMenu extends React.Component {
   constructor(props) {
@@ -66,7 +64,7 @@ class EntryPopupMenu extends React.Component {
       <>
         <Popover>
           <PopoverTrigger>
-            <Button>+</Button>
+            <Button>➕</Button>
           </PopoverTrigger>
           <PopoverContent width="200px">
             <PopoverHeader>Document!</PopoverHeader>
@@ -74,24 +72,22 @@ class EntryPopupMenu extends React.Component {
             <PopoverCloseButton />
             <PopoverBody>
               <Stack>
-                <Button colorScheme="blue" size="sm">
-                  Camera
-                </Button>
-
-                <Button colorScheme="blue" size="sm">
-                  Upload Media
-                </Button>
-                <Button colorScheme="blue" size="sm">
-                  Text Entry
-                </Button>
+                <CameraUpload
+                  challengeID={this.props.challengeID}
+                  entryID={this.props.entryID}
+                ></CameraUpload>
+                <EntryUpload
+                  challengeID={this.props.challengeID}
+                  entryID={this.props.entryID}
+                ></EntryUpload>
+                <TextUpload
+                  challengeID={this.props.challengeID}
+                  entryID={this.props.entryID}
+                ></TextUpload>
               </Stack>
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <EntryUpload
-          challengeID={this.props.challengeID}
-          entryID={this.props.entryID}
-        />
       </>
     );
   }

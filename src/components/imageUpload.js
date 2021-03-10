@@ -3,6 +3,7 @@ import { storage } from "../config";
 import { Button, Image } from "@chakra-ui/react";
 
 // Credit to Github user @ClintPy for Image-Uploader-React-Firebase
+// This class is used by EntryUpload which is for uploading a photo as an entry.
 class ImageUpload extends Component {
   constructor(props) {
     super(props);

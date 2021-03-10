@@ -18,12 +18,13 @@ export const ButtonCircle = styled.div`
   border-radius: 50%;
   overflow: hidden;
 
+  /* node image will be set in entry pop up model, this isn't used */
   ${(props) =>
     props.state === "current" &&
     `
-        background: blue;
-        background-image: url("https://pngimage.net/wp-content/uploads/2018/06/white-plus-sign-png.png");
-        background-size: cover;
+        /* background: blue; */
+        /* background-image: url("https://pngimage.net/wp-content/uploads/2018/06/white-plus-sign-png.png"); */
+        /* background-size: cover; */
     `}
   ${(props) =>
     props.state === "past" &&
@@ -101,14 +102,13 @@ const MapNode = ({ data, challengeID }) => {
       key={data.id}
       onClick={toggleModal}
     >
-      {data.state === "current" && (
-        // ask erin if data.id is challenge id
-        <EntryPopupMenu
-          challengeID={challengeID}
-          entryID={data.id}
-        ></EntryPopupMenu>
-      )}
       <ButtonCircle state={data.state} img={hasData ? data.object.imgUrl : ""}>
+        {data.state === "current" && (
+          <EntryPopupMenu
+            challengeID={challengeID}
+            entryID={data.id}
+          ></EntryPopupMenu>
+        )}
         <ButtonText>
           {data.id}
           {hasData && <div>{data.object.caption}</div>}

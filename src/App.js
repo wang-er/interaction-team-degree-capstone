@@ -1,17 +1,13 @@
 import "./App.css";
 import TestList from "./components/test-list";
-import ImageUpload from "./ImageUpload/index";
 import MapPage from "./pages/map-screen";
 import HomePage from "./pages/home";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/navigation";
 import AccountPage from "./pages/account";
 import FAQPage from "./pages/faq";
-import SettingsPage from "./pages/settings";
 import { db } from "./config";
-// 1. import `ChakraProvider` component
-import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -68,7 +64,6 @@ function App() {
               </Route>
               <Route path="/settings">
                 <TestList />
-                <ImageUpload />
               </Route>
               <Route path="/">
                 <HomePage onMapUpdate={updateMap} user={user} />

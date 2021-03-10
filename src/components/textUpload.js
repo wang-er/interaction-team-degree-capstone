@@ -10,14 +10,15 @@ import {
   Button,
   useDisclosure,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import { db } from "../config";
-import ImageUpload from "./imageUpload";
 
-// This function component is responsible for uploading a photo as an entry. It uses
-// ImageUpload component.
-function EntryUpload(props) {
-  let [imgUrl, setImgUrl] = React.useState("");
+// This function component is responsible for uploading a text entry
+function TextUpload(props) {
+  let [imgUrl, setImgUrl] = React.useState(
+    "http://assets.stickpng.com/images/5aa78e207603fc558cffbf19.png"
+  );
   let [caption, setCaption] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -27,21 +28,12 @@ function EntryUpload(props) {
     setCaption(inputValue);
   };
 
-  //  ImageUpload is a child component of EntryUpload. This function is used to send the image URL from child
-  // to parent.
-  const sendDataToParent = (obj) => {
-    const url = JSON.stringify(obj.url);
-    // remove unwanted slashes in front and back of String before we set it as img url and store it in firebase
-    var result = url.substring(1, url.length - 1);
-    setImgUrl(result);
-  };
-
   // Create official entry object and send to Firebase
   const sendEntryToFirebase = () => {
     db.ref("entries/" + props.entryID).set({
       id: props.entryID,
       caption: caption,
-      imgUrl: imgUrl,
+      // imgUrl: imgUrl,
       challengeID: props.challengeID,
     });
   };
@@ -49,17 +41,19 @@ function EntryUpload(props) {
   return (
     <>
       <Button colorScheme="blue" size="sm" onClick={onOpen}>
-        Upload Media
+        Text Entry
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ImageUpload sendDataToParent={sendDataToParent}></ImageUpload>
-          <ModalHeader>Add a Caption</ModalHeader>
+          <ModalHeader>Text Entry</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {/* <Text mb="8px">Value: {value}</Text> */}
+            <Text mb="10px">
+              Describe your progress and take time to reflect. How are you
+              feeling? What went well? What can you improve on?
+            </Text>
             <Textarea
               value={caption}
               onChange={handleInputChange}
@@ -77,4 +71,4 @@ function EntryUpload(props) {
     </>
   );
 }
-export default EntryUpload;
+export default TextUpload;

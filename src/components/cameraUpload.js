@@ -12,11 +12,11 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { db } from "../config";
-import ImageUpload from "./imageUpload";
+import WebCam from "./webCam";
 
-// This function component is responsible for uploading a photo as an entry. It uses
-// ImageUpload component.
-function EntryUpload(props) {
+// This function component is responsible for uploading a photo as an entry.
+// Parent of Webcam component.
+function CameraUpload(props) {
   let [imgUrl, setImgUrl] = React.useState("");
   let [caption, setCaption] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,12 +27,14 @@ function EntryUpload(props) {
     setCaption(inputValue);
   };
 
-  //  ImageUpload is a child component of EntryUpload. This function is used to send the image URL from child
+  //  WebCam is a child component of CameraUpload. This function is used to send the image URL from child
   // to parent.
   const sendDataToParent = (obj) => {
-    const url = JSON.stringify(obj.url);
+    const url = JSON.stringify(obj.screenshot);
+    console.log(url);
     // remove unwanted slashes in front and back of String before we set it as img url and store it in firebase
     var result = url.substring(1, url.length - 1);
+    console.log(result);
     setImgUrl(result);
   };
 
@@ -49,17 +51,17 @@ function EntryUpload(props) {
   return (
     <>
       <Button colorScheme="blue" size="sm" onClick={onOpen}>
-        Upload Media
+        Camera
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ImageUpload sendDataToParent={sendDataToParent}></ImageUpload>
+          <br></br>
+          <WebCam sendDataToParent={sendDataToParent}></WebCam>
           <ModalHeader>Add a Caption</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {/* <Text mb="8px">Value: {value}</Text> */}
             <Textarea
               value={caption}
               onChange={handleInputChange}
@@ -77,4 +79,4 @@ function EntryUpload(props) {
     </>
   );
 }
-export default EntryUpload;
+export default CameraUpload;
