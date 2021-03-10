@@ -23,21 +23,36 @@ import LoginPage from './pages/login';
 function App() {
 
   const [user, setUser] = React.useState({});
+
+  const [userID, setUserID] = React.useState("");
+  const updateUserID = id => {
+    console.log("USER ID "  + id);
+    setUserID(id);
+  }
+
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   //get current User
   useEffect(() => {
-    db.ref(`users/user2`).on('value', snapshot => { //HARDCODED TODO
-      const user = snapshot.val();
+    if(userID != "") {
+      db.ref(`users/${userID}`).on('value', snapshot => { //HARDCODED TODO
+        const user = snapshot.val();
+        console.log(user);
+        console.log("I FOUND MY DATA" + userID);
+        setUser(user);
+        setIsLoaded(true);
+        // preloadChallenge(user);
+      });
+    }  else {
       console.log(user);
-      setUser(user);
-      preloadChallenge(user);
-    });
+      setIsLoaded(true);
+    }
   }, []);
 
 
   //just for testing purposes? not sure if we'll need this when users have to log in a whatnot
   //mainly to deal with reloading the map screen page
+
   const preloadChallenge = (givenUser) => {
     db.ref('challenges/').orderByChild('userID').equalTo(givenUser.id).on('value', snapshot => {
       const challenges = snapshot.val();
@@ -63,7 +78,7 @@ function App() {
             <LandingPage />
           </Route>
           <Route path="/login">
-            <LoginPage />
+            <LoginPage onUserUpdate={updateUserID} />
           </Route>
           <Route path="/onboarding">
             <OnboardingPage/>
@@ -72,7 +87,7 @@ function App() {
             <CreateAccountPage/>
           </Route>
           <Route path="/create-account-details">
-            <CreateAccountDetailsPage/>
+            <CreateAccountDetailsPage  onUserUpdate={updateUserID}/>
           </Route>
           <Route path="/map">
             <MapPage ID={currentMapID} />
@@ -88,7 +103,7 @@ function App() {
             <ImageUpload />
           </Route>
           <Route path="/home">
-            <HomePage onMapUpdate={updateMap} user={user} />
+            <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
           </Route>
           <Route path="/">
             <LandingPage/>

@@ -82,6 +82,7 @@ export const SkipButton = styled.div`
     font-weight: bold;
     padding: 10px;
     margin: 10px;
+    text-align: center;
 `
 
 export const SignupButton = styled.div`
@@ -90,8 +91,26 @@ export const SignupButton = styled.div`
     margin: 10px;
 `
 
+export const CarouselButton = styled.button` 
+    border: none;
+    font-weight: bold;
+    color: ${props => (props.isFilled ? 'white' : 'blue')};
+    padding: 10px;
+    background-color: ${props => (props.isFilled ? 'blue' : 'transparent')};
+    border: 1px solid blue;
+    border-radius: 3px;
+    margin: 10px;
+    text-decoration: none;
+
+    a {
+        text-decoration: none;
+        color: ${props => (props.isFilled ? 'white' : 'blue')};
+    }
+`
+
 
 export const OnboardingHeader = styled.div`
+    font-size: 30px;
 `
 
 export const OnboardingTextBox = styled.div`
@@ -106,54 +125,25 @@ export const DemoImage = styled.img`
     object-fit: cover;
 `
 
-export const CarouselArrow = styled.button` 
-    border: none;
-    background: none;
-    &:focus {
-        outline: none;
-    }
-    svg {
-        fill: transparent;
-        transition: all 0.2s;
-    }
-    &:hover svg {
-        fill: purple;
-    }
-
-`
-
-export const CarouselControl = styled.div`
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-`
-
-
 export const CarouselDotList = styled.div`
     display: flex;
     align-items: baseline;
     justify-content: space-between;
 `
 
-export const CarouselDot = styled.button`
-    padding: 15px;
-    border: none;
-    background: none;
-    outline: none;
-
-    &:focus {
-        outline: none;
-    }
-
-    svg {
-        fill:  ${props => (props.isActive ? 'purple' : 'transparent')};
-        transition: all 0.2s;
-    }
-
-    &:hover svg {
-        fill: purple;
-    }
+export const CarouselDot = styled.div`
+    height: 6px;
+    width: 6px;
+    background-color:  ${props => (props.isActive ? 'purple' : '#bbb')};
+    transition: all 0.2s;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 5px;
 `
+
+export const CarouselButtons = styled.div`
+`
+
 
 
 const OnboardingPage = () => {
@@ -218,53 +208,62 @@ const OnboardingPage = () => {
                 timeout={150}
                 classNames="fade">
                 <SlideBox>
-                    <OnboardingHeader>{carouselSlidesData[index].title}</OnboardingHeader>
                     <DemoImage src={carouselSlidesData[index].imageURL} />
+                    <OnboardingHeader>{carouselSlidesData[index].title}</OnboardingHeader>
                     <OnboardingTextBox>
                         {carouselSlidesData[index].content}
                     </OnboardingTextBox>
                 </SlideBox>
             </CSSTransition>
         </TransitionGroup>
-        <CarouselControl>
-            {/* <CarouselArrow onClick={leftClick}> */}
-            {/* <ChevronLeftIconSVG />
-                 */}
-            {/* back */}
-            {/* </CarouselArrow> */}
-            <CarouselDotList>
-                {carouselSlidesData.map((currElement, currIndex) =>
-                    <CarouselDot key={currIndex} onClick={() => setIndex(currIndex)} isActive={(currIndex == index)}>
-                        {currIndex}
-                    </CarouselDot>
-                )}
-            </CarouselDotList>
-        </CarouselControl>
+        <CarouselDotList>
+            {carouselSlidesData.map((currElement, currIndex) =>
+                <CarouselDot key={currIndex} isActive={(currIndex == index)} />
+
+            )}
+        </CarouselDotList>
         <ButtonsContainer>
-            {(index != maxIndex) &&
-                <>
-                    <CarouselArrow onClick={rightClick}>
+            {(index === 0) &&
+                <CarouselButtons key="carousel">
+                    <CarouselButton isFilled key="button2" onClick={rightClick}>
                         forward
-                                </CarouselArrow>
-                    <Link to={{ pathname: "/create-account" }}>
-                        <SignupButton>
+                </CarouselButton>
+                    <Link key="button3" to={{ pathname: "/create-account" }}>
+                        <SkipButton>
                             Skip
-                            </SignupButton>
+                    </SkipButton>
                     </Link>
-                </>}
+                </CarouselButtons>}
+            {(index !== maxIndex && index !== 0) &&
+                <CarouselButtons key="carousel">
+                    <CarouselButton  key="button1" onClick={leftClick}>
+                        back
+                    </CarouselButton>
+                    <CarouselButton isFilled key="button2" onClick={rightClick}>
+                        forward
+                    </CarouselButton>
+                    <Link key="button3" to={{ pathname: "/create-account" }}>
+                        <SkipButton>
+                            Skip
+                        </SkipButton>
+                    </Link>
+                </CarouselButtons>}
             {(index === maxIndex) &&
-                <>
-                    <Link to={{ pathname: "/create-account" }}>
-                        <SignupButton>
+                <CarouselButtons key="carousel">
+                    <CarouselButton key="button1" onClick={leftClick}>
+                        back
+                    </CarouselButton>
+                    <CarouselButton isFilled key="button2">
+                        <Link to={{ pathname: "/create-account" }}>
                             Get Started
-                            </SignupButton>
-                    </Link>
-                    <Link to={{ pathname: "/faq" }}>
+                        </Link>
+                    </CarouselButton>
+                    {/* <Link key="button3" to={{ pathname: "/faq" }}>
                         <FAQButton>
                             View FAQ
                             </FAQButton>
-                    </Link>
-                </>}
+                    </Link> */}
+                </CarouselButtons>}
         </ButtonsContainer>
     </BoardingLayout>
 }
