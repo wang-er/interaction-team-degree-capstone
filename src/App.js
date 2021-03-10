@@ -14,11 +14,11 @@ import AccountPage from './pages/account';
 import FAQPage from './pages/faq';
 import SettingsPage from './pages/settings';
 import { db } from './config';
-import LandingPage from './pages/landing';
-import OnboardingPage from './pages/onboarding';
-import CreateAccountPage from './pages/new-user';
-import CreateAccountDetailsPage from './pages/create-account';
-import LoginPage from './pages/login';
+import LandingPage from './pages/onboarding/landing';
+import OnboardingPage from './pages/onboarding/onboarding';
+import CreateAccountPage from './pages/onboarding/new-user';
+import CreateAccountDetailsPage from './pages/onboarding/create-account';
+import LoginPage from './pages/onboarding/login';
 
 function App() {
 

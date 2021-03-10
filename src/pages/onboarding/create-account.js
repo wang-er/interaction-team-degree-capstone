@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link, useHistory } from 'react-router-dom';
-import { db } from '../config';
+import { db } from '../../config';
 
 
 export const LandingLayout = styled.div`

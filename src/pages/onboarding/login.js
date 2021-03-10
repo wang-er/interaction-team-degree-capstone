@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link, useHistory } from 'react-router-dom';
-import { db } from '../config';
+import { db } from '../../config';
 
 export const LandingLayout = styled.div`
     background-color: #E0E0E0;
@@ -97,8 +97,7 @@ const LoginPage = ({onUserUpdate}) => {
             </LandingTitle>
             <LoginForm onSubmit={findLogin}>
                 <Input type="tel" placeholder="XXX-XXX-XXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
-                <ErrorMessage isOpen={hasError}>Couldn't find your number!
-            </ErrorMessage>
+                <ErrorMessage isOpen={hasError}>Couldn't find your number! </ErrorMessage>
                 <LoginButton as="input" type="submit" name="submit" value="Log in"></LoginButton>
             </LoginForm>
 
