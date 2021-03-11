@@ -31,10 +31,8 @@ function CameraUpload(props) {
   // to parent.
   const sendDataToParent = (obj) => {
     const url = JSON.stringify(obj.screenshot);
-    console.log(url);
     // remove unwanted slashes in front and back of String before we set it as img url and store it in firebase
     var result = url.substring(1, url.length - 1);
-    console.log(result);
     setImgUrl(result);
   };
 

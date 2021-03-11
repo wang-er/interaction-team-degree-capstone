@@ -5,7 +5,13 @@ import { Button } from "@chakra-ui/react";
 class WebCam extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { screenshot: "" };
+    this.state = { screenshot: null, hideCam: false };
+  }
+
+  hideComponent() {
+    this.setState({
+      hideCam: true,
+    });
   }
 
   setRef = (webcam) => {
@@ -16,8 +22,11 @@ class WebCam extends React.Component {
     const screenshot = this.webcam.getScreenshot();
     this.setState({ screenshot: screenshot });
     this.props.sendDataToParent({ screenshot });
+    this.hideComponent();
+  };
 
-    console.log(screenshot);
+  showWebCam = () => {
+    this.setState({ hideCam: false });
   };
 
   render() {
@@ -30,18 +39,24 @@ class WebCam extends React.Component {
     return (
       <div>
         <br></br>
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={500}
-          videoConstraints={videoConstraints}
-        />
-        <Button onClick={this.capture.bind(this)}>Capture photo</Button>
-        {this.state.screenshot ? (
-          <img src={this.state.screenshot} height={500} />
-        ) : null}
+        {this.state.hideCam == false ? (
+          <div>
+            <Webcam
+              audio={false}
+              height={350}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              width={500}
+              videoConstraints={videoConstraints}
+            />
+            <Button onClick={this.capture.bind(this)}>Capture photo</Button>
+          </div>
+        ) : (
+          <div>
+            <img src={this.state.screenshot} height={500} />
+            <Button onClick={this.showWebCam.bind(this)}>Retake</Button>
+          </div>
+        )}
       </div>
     );
   }
