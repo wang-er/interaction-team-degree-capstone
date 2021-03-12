@@ -50,7 +50,6 @@ function App() {
 
   //just for testing purposes? not sure if we'll need this when users have to log in a whatnot
   //mainly to deal with reloading the map screen page
-
   const preloadChallenge = (givenUser) => {
     db.ref("challenges/")
       .orderByChild("userID")

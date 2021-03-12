@@ -18,7 +18,6 @@ export const MenuGroup = styled.div`
     height: 100vh;
     padding-top: 75px;
     width: 70vw;
-    word-wrap: unset;
 `
 
 export const MenuItem = styled.div`
@@ -27,6 +26,7 @@ export const MenuItem = styled.div`
     text-decoration: none;
     color: black;
     font-size: 20px;
+    word-wrap: normal;
   }
 `
 
