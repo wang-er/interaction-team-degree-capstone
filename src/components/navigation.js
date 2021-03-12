@@ -26,6 +26,7 @@ export const MenuItem = styled.div`
     text-decoration: none;
     color: black;
     font-size: 20px;
+    word-wrap: normal;
   }
 `
 
@@ -53,6 +54,7 @@ export const HamburgerIcon = styled.img`
     display: inline;
     top: 20px;
     left: 20px;
+    max-width: none;
 `
 
 const Navigation = () => {
@@ -69,7 +71,7 @@ const Navigation = () => {
               </Link>
         </MenuButton>
         <MenuItem>
-          <Link to="/">
+          <Link to="/home">
             Home
               </Link>
         </MenuItem>

@@ -16,17 +16,31 @@ export const ChallengesContainer = styled.div`
     }
 `
 
-
-const HomePage = ({ onMapUpdate, user }) => {
+const HomePage = ({ onMapUpdate, user, userID }) => {
     const [challenges, setChallenges] = React.useState({});
 
     useEffect(() => {
-        db.ref('challenges/').orderByChild('userID').equalTo(user.id).on('value', snapshot => {
-            const challenges = snapshot.val();
-            setChallenges(challenges);
-            console.log(challenges);
+        db.ref('challenges/').orderByChild('userID').equalTo(userID).on('value', snapshot => {
+            var dbChallenges = snapshot.val()
+            if (dbChallenges !== undefined && dbChallenges !== null) {
+            setChallenges(dbChallenges);
+        } else {
+            setChallenges({});
+        }
         });
     }, []);
+
+    const renderContent = () => {
+        console.log(userID);
+        console.log(challenges);
+        if (challenges !== null || challenges !== undefined || challenges !== {}) {
+          return Object.keys(challenges).map((keyName, i) => (
+            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
+                <ChallengeBlock key={i} challenge={challenges[keyName]} />
+            </Link>
+        ))
+        } 
+      }
 
     return (
         <Layout>
@@ -34,11 +48,7 @@ const HomePage = ({ onMapUpdate, user }) => {
                 Home
         </div>
             <ChallengesContainer>
-                {Object.keys(challenges).map((keyName, i) => (
-                    <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
-                        <ChallengeBlock key={i} challenge={challenges[keyName]} />
-                    </Link>
-                ))}
+                {renderContent()}
             </ChallengesContainer>
         </Layout>
     )
