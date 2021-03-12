@@ -18,6 +18,7 @@ export const MenuGroup = styled.div`
     height: 100vh;
     padding-top: 75px;
     width: 70vw;
+    word-wrap: unset;
 `
 
 export const MenuItem = styled.div`
@@ -53,6 +54,7 @@ export const HamburgerIcon = styled.img`
     display: inline;
     top: 20px;
     left: 20px;
+    max-width: none;
 `
 
 const Navigation = () => {

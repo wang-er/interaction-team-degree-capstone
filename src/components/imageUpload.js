@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { storage } from "../config";
+import { Button, Image } from "@chakra-ui/react";
 
 // Credit to Github user @ClintPy for Image-Uploader-React-Firebase
+// This class is used by EntryUpload which is for uploading a photo as an entry.
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null,
+      image: "",
       url: "",
       progress: 0,
+      captionInput: "",
     };
+  }
+
+  sendURLtoEntryUpload(imgUrl) {
+    this.props.sendData(imgUrl);
   }
 
   handleChange = (e) => {
@@ -19,6 +26,7 @@ class ImageUpload extends Component {
     }
   };
 
+  // uploads photo to firebase STORAGE
   handleUpload = () => {
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -44,51 +52,26 @@ class ImageUpload extends Component {
           .getDownloadURL()
           .then((url) => {
             this.setState({ url });
+            // send image url to entryUpload parent here
+            this.props.sendDataToParent({ url });
           });
       }
     );
   };
-  render() {
+
+  render(props) {
     return (
-      <div className="center">
-        <br />
-        <h2 className="green-text">React Firebase Image Uploader</h2>
-        <br />
-        <br />
-        <div className="row">
-          <progress
-            value={this.state.progress}
-            max="100"
-            className="progress"
-          />
-        </div>
-        <br />
-        <br />
-        <br />
-        <div className="file-field input-field">
-          <div className="btn">
-            <span>File</span>
-            <input type="file" onChange={this.handleChange} />
-          </div>
-          <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" />
-          </div>
-        </div>
-        <button
+      <>
+        <Image src={this.state.url || "https://via.placeholder.com/150"} />
+        {console.log(this.state.url)}
+        <input type="file" id="file-upload" onChange={this.handleChange} />
+        <Button
           onClick={this.handleUpload}
           className="waves-effect waves-light btn"
         >
           Upload
-        </button>
-        <br />
-        <br />
-        <img
-          src={this.state.url || "https://via.placeholder.com/400x300"}
-          alt="Uploaded Images"
-          height="300"
-          width="400"
-        />
-      </div>
+        </Button>
+      </>
     );
   }
 }

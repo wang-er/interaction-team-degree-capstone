@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* input[type="file"] {
+  display: none;
+} */
+
+#file-upload-label {
+  z-index: 999;
+}

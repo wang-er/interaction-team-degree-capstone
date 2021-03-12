@@ -1,6 +1,5 @@
 import './App.css';
 import TestList from './components/test-list'
-import ImageUpload from "./ImageUpload/index";
 import MapPage from './pages/map-screen'
 import HomePage from './pages/home'
 import React, { useEffect, useState } from "react";
@@ -19,9 +18,9 @@ import OnboardingPage from './pages/onboarding/onboarding';
 import CreateAccountPage from './pages/onboarding/new-user';
 import CreateAccountDetailsPage from './pages/onboarding/create-account';
 import LoginPage from './pages/onboarding/login';
+import ImageUpload from './components/imageUpload';
 
 function App() {
-
   const [user, setUser] = React.useState({});
 
   const [userID, setUserID] = React.useState("");
@@ -49,26 +48,27 @@ function App() {
     }
   }, []);
 
-
   //just for testing purposes? not sure if we'll need this when users have to log in a whatnot
   //mainly to deal with reloading the map screen page
 
   const preloadChallenge = (givenUser) => {
-    db.ref('challenges/').orderByChild('userID').equalTo(givenUser.id).on('value', snapshot => {
-      const challenges = snapshot.val();
-      console.log(challenges);
-      if (Object.keys(challenges).length !== 0) {
-        setMapID(challenges[Object.keys(challenges)[0]].id);
-      }
-      setIsLoaded(true);
-    });
-  }
-
+    db.ref("challenges/")
+      .orderByChild("userID")
+      .equalTo(givenUser.id)
+      .on("value", (snapshot) => {
+        const challenges = snapshot.val();
+        console.log(challenges);
+        if (Object.keys(challenges).length !== 0) {
+          setMapID(challenges[Object.keys(challenges)[0]].id);
+        }
+        setIsLoaded(true);
+      });
+  };
 
   const [currentMapID, setMapID] = React.useState("");
-  const updateMap = map => {
+  const updateMap = (map) => {
     setMapID(map);
-  }
+  };
 
   return (<> {isLoaded &&
     <Router>
