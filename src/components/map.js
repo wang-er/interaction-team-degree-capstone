@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import MapNode from "./mapNode";
 import { db } from "../config";
+import PiggyBankNode from "./piggyBankNode";
 
 export const MapContainer = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ export const Modal = styled.div`
 `;
 
 //functional components?
-const Map = ({ data }) => {
+const Map = ({ data, id }) => {
   const [mapNodeList, setMapNodeList] = React.useState([]);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -34,6 +35,7 @@ const Map = ({ data }) => {
           const entries = snapshot.val();
           sortExistingEntries(entries); //how to escape from on? or keep it?
           setIsLoaded(true);
+          updateMapData(entries);
         });
     }
   }, []);
@@ -53,15 +55,29 @@ const Map = ({ data }) => {
     );
 
     console.log(entriesList);
+    console.log("lol");
+
     generateNodeList(entriesList);
   };
+
+  const updateMapData = (data) => {
+    var query = db.ref('challenges/').orderByChild('id').equalTo(id);
+    query.once("child_added", function (snapshot) {
+      if(data !== undefined && data !== null) {
+        snapshot.ref.update({ currentDay: Object.keys(data).length })
+      } else {
+        snapshot.ref.update({ currentDay: 0 })
+      }
+    });
+}
 
   const generateNodeList = (givenEntries) => {
     var entriesList = [];
     //for values w/o entries first, uncompleted days
     for (var i = 0; i < data.totalDays; i++) {
       entriesList.push({
-        id: i,
+        day: i,
+        id: `${data.id}-${i}`,
         object: { challengeID: data.id },
         state: "future",
       });
@@ -69,12 +85,13 @@ const Map = ({ data }) => {
 
     //then replace with ones w/ data?
     for (var j = 0; j < givenEntries.length; j++) {
-      entriesList[j] = { id: j, object: givenEntries[j].object, state: "past" };
+      entriesList[j] = { day: j, id: `${data.id}-${j}`, object: givenEntries[j].object, state: "past" };
     }
 
     if (data.totalDays > givenEntries.length) {
       entriesList[givenEntries.length] = {
-        id: givenEntries.length,
+        day: givenEntries.length,
+        id:  `${data.id}-${givenEntries.length}`,
         object: { challengeID: data.id },
         state: "current",
       };
@@ -92,6 +109,7 @@ const Map = ({ data }) => {
           mapNodeList.map((node) => {
             return <MapNode data={node} challengeID={data.id} />;
           })}
+          {isLoaded && <PiggyBankNode data={data} id={id}/>}
       </MapContainer>
     </>
   );

@@ -19,6 +19,7 @@ import CreateAccountPage from './pages/onboarding/new-user';
 import CreateAccountDetailsPage from './pages/onboarding/create-account';
 import LoginPage from './pages/onboarding/login';
 import ImageUpload from './components/imageUpload';
+import PiggyBankPage from './pages/piggybankPage';
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -103,6 +104,9 @@ function App() {
           </Route>
           <Route path="/home">
             <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
+          </Route>
+          <Route path="/piggy-completion">
+            <PiggyBankPage/>
           </Route>
           <Route path="/">
             <LandingPage/>

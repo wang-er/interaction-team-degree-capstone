@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from "styled-components";
-import FAQPage from '../faq';
 
 export const BoardingLayout = styled.div`
     background-color: #E0E0E0;
