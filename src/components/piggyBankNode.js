@@ -70,7 +70,7 @@ const PiggyBankNode = ({ data, id }) => {
             query.once("child_added", function (snapshot) {
                 snapshot.ref.update({ isArchived: true })
               });
-            history.push("/piggy-completion");
+            history.push('/piggy-completion', { data: data })
             }
             
     }

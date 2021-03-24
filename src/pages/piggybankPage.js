@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from "styled-components";
 
@@ -16,7 +16,7 @@ export const BoardingLayout = styled.div`
 `
 
 export const SlideBox = styled.div`
-    display: flex;
+    display: ${(props) => (props.isOpen ? "flex" : "none")};
     padding: 0px 35px;
     height: 60vh;
     flex-direction: column;
@@ -33,42 +33,80 @@ export const DemoImage = styled.img`
     object-fit: cover;
 `
 
+export const CarouselButton = styled.button` 
+    border: none;
+    font-weight: bold;
+    color: ${props => (props.isFilled ? 'white' : 'blue')};
+    padding: 10px;
+    background-color: ${props => (props.isFilled ? 'blue' : 'transparent')};
+    border: 1px solid blue;
+    border-radius: 3px;
+    margin: 10px;
+    text-decoration: none;
+
+    a {
+        text-decoration: none;
+        color: ${props => (props.isFilled ? 'white' : 'blue')};
+    }
+`
 
 
 const PiggyBankPage = () => {
-
+    const history = useHistory();
+    const data = history.location.state?.data
     // Images of piggy bank state
     const carouselSlidesData = [
         {
-           imageURL: "https://cdn.discordapp.com/emojis/623731761234575370.png"
+            content: "Tap the piggy bank to break it!",
+            imageURL: "https://cdn.discordapp.com/emojis/623731761234575370.png"
         },
         {
+            content: "",
             imageURL: "https://cdn.discordapp.com/emojis/563971267720642581.png"
         },
         {
+            content: "",
             imageURL: "https://cdn.discordapp.com/emojis/487275835967930389.png?v=1"
         }
     ];
 
-    const maxIndex = carouselSlidesData.length - 1;
+    // const maxIndex = carouselSlidesData.length - 1;
+    const maxIndex = 5 - 1;
     const [index, setIndex] = React.useState(0);
-
     const rightClick = () => {
         if (index < maxIndex) {
             setIndex(index + 1);
         }
     }
+    const isOpen = (indexValue) => {
+        return indexValue === index + 1;
+    }
+
+    // const data = this.props.history.location.state?.data
 
     return <BoardingLayout>
-        {/* <TransitionGroup>
-            <CSSTransition key={index}
-                timeout={150}
-                classNames="fade"> */}
-                <SlideBox>
-                    <DemoImage src={carouselSlidesData[index].imageURL} onClick={rightClick} />
+                <SlideBox id="1" isOpen={isOpen(1)}>
+                    {carouselSlidesData[0].content}
+                    <DemoImage src={carouselSlidesData[0].imageURL} onClick={rightClick} />
                 </SlideBox>
-            {/* </CSSTransition>
-        </TransitionGroup> */}
+                <SlideBox id="2" isOpen={isOpen(2)}>
+                    {carouselSlidesData[1].content}
+                    <DemoImage src={carouselSlidesData[1].imageURL} onClick={rightClick} />
+                </SlideBox>
+                <SlideBox id="3" isOpen={isOpen(3)}>
+                    {carouselSlidesData[2].content}
+                    <DemoImage src={carouselSlidesData[2].imageURL} onClick={rightClick} />
+                </SlideBox>
+                <SlideBox id="4" isOpen={isOpen(4)}>
+                    Congrats! You’ve successfully completed your goal. Go ahead and treat yourself with your reward:
+                    {data.title}
+                    <CarouselButton isFilled onClick={rightClick}>
+                        Claim Reward
+                    </CarouselButton>
+                </SlideBox>
+                <SlideBox id="5" isOpen={isOpen(5)}>
+
+                </SlideBox>
     </BoardingLayout>
 }
 

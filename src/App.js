@@ -105,8 +105,7 @@ function App() {
           <Route path="/home">
             <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
           </Route>
-          <Route path="/piggy-completion">
-            <PiggyBankPage/>
+          <Route path="/piggy-completion" component={PiggyBankPage}>
           </Route>
           <Route path="/">
             <LandingPage/>
