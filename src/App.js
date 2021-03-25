@@ -108,7 +108,7 @@ function App() {
               </Route>
               <Route path="/piggy-completion" component={PiggyBankPage}></Route>
               <Route path="/create-challenge">
-                <CreateChallengePage />
+                <CreateChallengePage userID={userID} />
               </Route>
               <Route path="/">
                 <LandingPage />

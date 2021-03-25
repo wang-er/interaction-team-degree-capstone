@@ -47,6 +47,11 @@
 
 .create-challenge-title {
   font-size: 30px;
+  margin-left: 20px;
+}
+
+.create-challenge-text {
+  margin-left: 20px;
 }
 
 .react-photo-gallery--gallery div {
@@ -55,4 +60,8 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+p {
+  white-space: pre-wrap;
 }
