@@ -30,14 +30,28 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
         });
     }, []);
 
-    const renderContent = () => {
-        console.log(userID);
-        console.log(challenges);
+    const renderCurrentContent = () => {
         if (challenges !== null || challenges !== undefined || challenges !== {}) {
           return Object.keys(challenges).map((keyName, i) => (
+            (challenges[keyName].isArchived !== true) ? 
             <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
                 <ChallengeBlock key={i} challenge={challenges[keyName]} />
             </Link>
+            :
+            <></>
+        ))
+        } 
+      }
+
+      const renderArchivedContent = () => {
+        if (challenges !== null || challenges !== undefined || challenges !== {}) {
+          return Object.keys(challenges).map((keyName, i) => (
+            (challenges[keyName].isArchived === true) ? 
+            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
+                <ChallengeBlock key={i} challenge={challenges[keyName]} />
+            </Link>
+            :
+            <></>
         ))
         } 
       }
@@ -45,10 +59,19 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
     return (
         <Layout>
             <div>
-                Home
+                Goals
+            </div>
+        <div>
+                Current Goals
         </div>
             <ChallengesContainer>
-                {renderContent()}
+                {renderCurrentContent()}
+            </ChallengesContainer>
+            <div>
+                Past Goals
+        </div>
+        <ChallengesContainer>
+                {renderArchivedContent()}
             </ChallengesContainer>
         </Layout>
     )
