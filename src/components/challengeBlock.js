@@ -1,9 +1,10 @@
 import React from "react"
 import styled from "styled-components"
+import { gradient } from "./base/colors"
 
 export const ChallengeContainer = styled.div`
     border-radius: 10px;
-    background: grey;
+    background: ${gradient};
     padding: 20px; 
     margin: 15px;
     height: 20vh;

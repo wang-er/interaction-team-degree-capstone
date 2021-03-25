@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Layout from '../components/layout'
 import { db } from '../config';
 import { Link } from 'react-router-dom';
+import { Button, HyperLink, SmallButton, LoginButton } from '../components/base/buttons';
+import { Input, Select, Label } from '../components/base/forms';
 
 export const ChallengesContainer = styled.div`
     display: flex;
@@ -61,6 +63,25 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
             <div>
                 Goals
             </div>
+            <Button type="danger">Hello</Button>
+            <SmallButton>huh</SmallButton>
+            <LoginButton>
+                <img src="https://ai.devoteam.com/wp-content/uploads/sites/91/2018/05/google-logo-icon-png-transparent-background.png"/>
+                <div>Continue with Google</div>
+                </LoginButton>
+            <HyperLink type="danger" to="/login">noooo</HyperLink>
+            <Label>
+                <Input shadowed type="checkbox" placeholder="XXX-XXX-XXXX"/>
+                Hello
+            </Label>
+            
+            
+            <Select id="cars" name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </Select>
         <div>
                 Current Goals
         </div>
