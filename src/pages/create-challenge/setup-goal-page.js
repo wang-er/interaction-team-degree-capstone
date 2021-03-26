@@ -20,12 +20,13 @@ export const CarouselButton = styled.button`
   }
 `;
 
+export const CarouselButtons = styled.div``;
+
 const SetUpGoalPage = (props) => {
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
   const [duration, setDuration] = React.useState("");
   const [endDate, setEndDate] = React.useState("");
-  // this.props.sendDataToParent({ screenshot });
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -72,8 +73,18 @@ const SetUpGoalPage = (props) => {
           />{" "}
           {"\n"}
           {"\n"}
-          <input type="text" size="8" name="challenge-frequency" /> times a{" "}
-          <select id="frequency-options" name="frequency-options">
+          <input
+            type="text"
+            size="8"
+            name="challenge-frequency"
+            onChange={handleInputChange("frequency")}
+          />{" "}
+          times a{" "}
+          <select
+            id="frequency-options"
+            name="frequency-options"
+            onChange={handleInputChange("duration")}
+          >
             <option value="day">day</option>
             <option value="week" selected>
               week
@@ -85,7 +96,13 @@ const SetUpGoalPage = (props) => {
           {"\n"}
           My ideal end date is: {"\n"}
           {"\n"}
-          <input type="text" size="16" placeholder="MM/DD/YYYY" name="date" />
+          <input
+            type="text"
+            size="16"
+            placeholder="MM/DD/YYYY"
+            name="date"
+            onChange={handleInputChange("endDate")}
+          />
         </p>
       </form>
       <CarouselButton onClick={handleValues} isFilled key="button2">

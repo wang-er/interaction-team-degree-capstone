@@ -64,6 +64,8 @@ export const CreateChallengeLayout = styled.div`
 
 const CreateChallengePage = (props) => {
   const [index, setIndex] = React.useState(0);
+  const random = Math.floor(Math.random() * 90000) + 10000;
+  const challengeID = `${props.userID}-${random}`;
   // setup-goal-page gives these values
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
@@ -75,23 +77,25 @@ const CreateChallengePage = (props) => {
   // motive gives this value
   const [motive, setMotive] = React.useState("");
 
-  // Create official challenge object and send to Firebase
-  const sendChallengeToFirebase = () => {
-    // create random 5 digit number for challenge ID
-    const challengeID = Math.floor(Math.random() * 90000) + 10000;
-    // actual challenge ID will have user id as prefix
-    const actualChallengeID = `${props.userID}-${challengeID}`;
-    db.ref("challenges/" + challengeID).set({
-      id: actualChallengeID,
-      challengeName: challengeName,
-      frequency: frequency,
-      duration: duration,
-      endDate: endDate,
-      reward: reward,
-      moneyAmount: moneyAmount,
-      motive: motive,
-    });
-  };
+  //   // Create official challenge object and send to Firebase
+  //   const sendChallengeToFirebase = () => {
+  //     // create random 5 digit number for challenge ID
+  //     const challengeID = Math.floor(Math.random() * 90000) + 10000;
+  //     // actual challenge ID will have user id as prefix
+  //     const actualChallengeID = `${props.userID}-${challengeID}`;
+  //     setChallengeID(actualChallengeID);
+  //     console.log(actualChallengeID);
+  //     db.ref("challenges/" + challengeID).set({
+  //       id: actualChallengeID,
+  //       challengeName: challengeName,
+  //       frequency: frequency,
+  //       duration: duration,
+  //       endDate: endDate,
+  //       reward: reward,
+  //       moneyAmount: moneyAmount,
+  //       motive: motive,
+  //     });
+  //   };
 
   const sendDataToParent = (value, property) => {
     switch (property) {
@@ -105,22 +109,12 @@ const CreateChallengePage = (props) => {
         setEndDate(value);
       case "index":
         setIndex(value);
-    }
-  };
-
-  const leftClick = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    } else {
-      setIndex(0);
-    }
-  };
-
-  const rightClick = () => {
-    if (index < maxIndex) {
-      setIndex(index + 1);
-    } else {
-      setIndex(0);
+      case "reward":
+        setReward(value);
+      case "moneyAmount":
+        setMoneyAmount(value);
+      case "motive":
+        setMotive(value);
     }
   };
 
@@ -128,55 +122,28 @@ const CreateChallengePage = (props) => {
   // based on index from user's click
   const routes = {
     0: <SetUpGoalPage sendDataToParent={sendDataToParent} index={index} />,
-    1: <CreateRewardPage sendDataToParent={sendDataToParent} />,
-    2: <MotivePage sendDataToParent={sendDataToParent} />,
-    3: <ConfirmGoalPage />,
-    4: <PaymentDetailsPage />,
+    1: <CreateRewardPage sendDataToParent={sendDataToParent} index={index} />,
+    2: <MotivePage sendDataToParent={sendDataToParent} index={index} />,
+    3: (
+      <ConfirmGoalPage
+        sendDataToParent={sendDataToParent}
+        index={index}
+        challengeName={challengeName}
+        frequency={frequency}
+        duration={duration}
+        endDate={endDate}
+        reward={reward}
+        moneyAmount={moneyAmount}
+        motive={motive}
+        challengeID={challengeID}
+      />
+    ),
+    4: <PaymentDetailsPage sendDataToParent={sendDataToParent} index={index} />,
     // 5: <DepositAnimationPage />,
   };
   const maxIndex = Object.keys(routes).length - 1;
 
-  return (
-    <CreateChallengeLayout>
-      {routes[index]}
-      <ButtonsContainer>
-        {index === 0 && (
-          <CarouselButtons key="carousel">
-            <CarouselButton isFilled key="button2" onClick={rightClick}>
-              Next
-            </CarouselButton>
-          </CarouselButtons>
-        )}
-        {index !== maxIndex && index !== 0 && (
-          <CarouselButtons key="carousel">
-            <CarouselButton key="button1" onClick={leftClick}>
-              Back
-            </CarouselButton>
-            <CarouselButton isFilled key="button2" onClick={rightClick}>
-              Next
-            </CarouselButton>
-          </CarouselButtons>
-        )}
-        {index === maxIndex && (
-          <CarouselButtons key="carousel">
-            <CarouselButton key="button1" onClick={leftClick}>
-              Back
-            </CarouselButton>
-            <CarouselButton
-              isFilled
-              key="button2"
-              onClick={() => alert("open animation here??")}
-            >
-              Confirm Payment
-            </CarouselButton>
-            <CarouselButton isFilled="false" key="button2">
-              Skip Payment
-            </CarouselButton>
-          </CarouselButtons>
-        )}
-      </ButtonsContainer>
-    </CreateChallengeLayout>
-  );
+  return <CreateChallengeLayout>{routes[index]}</CreateChallengeLayout>;
 };
 
 export default CreateChallengePage;
