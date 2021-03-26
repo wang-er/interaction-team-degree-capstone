@@ -99,8 +99,9 @@ function App() {
             <FAQPage />
           </Route>
           <Route path="/settings">
-            <TestList />
-            <ImageUpload />
+            {/* <TestList />
+            <ImageUpload /> */}
+            <FAQPage />
           </Route>
           <Route path="/home">
             <HomePage onMapUpdate={updateMap} user={user} userID={userID} />

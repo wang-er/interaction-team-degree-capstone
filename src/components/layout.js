@@ -11,14 +11,15 @@ export const LayoutDiv = styled.div`
 `
 
 export const Container = styled.div`
-  padding-top: 50px;
+  padding-bottom: 75px;
+  padding-top: 20px;
+
 `
-const Layout = ({ children }) => {
+const Layout = ({ children, location = "" }) => {
   return (
     <>
-      <Navigation />
+      <Navigation location={location} />
       <LayoutDiv>
-
         <Container>
           <div>
             {children}

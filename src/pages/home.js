@@ -59,7 +59,7 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
       }
 
     return (
-        <Layout>
+        <Layout location="home">
             <div>
                 Goals
             </div>
