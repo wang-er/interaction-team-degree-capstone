@@ -37,13 +37,16 @@ const ConfirmGoalPage = (props) => {
   const sendChallengeToFirebase = () => {
     db.ref("challenges/" + props.challengeID).set({
       id: props.challengeID,
-      challengeName: props.challengeName,
+      userID: props.userID,
+      title: props.challengeName,
       frequency: props.frequency,
       duration: props.duration,
       endDate: props.endDate,
       reward: props.reward,
       moneyAmount: props.moneyAmount,
       motive: props.motive,
+      currentDay: props.currentDay,
+      totalDays: props.totalDays,
     });
   };
 
@@ -54,6 +57,9 @@ const ConfirmGoalPage = (props) => {
 
   return (
     <>
+      {console.log(
+        `reward is ${props.reward} and moneyAmount ${props.moneyAmount}`
+      )}
       <h1 class="create-challenge-title">Confirm your goal.</h1>
       <p class="create-challenge-text">
         Make sure all your info is correct, then you can set up your payment
@@ -66,7 +72,7 @@ const ConfirmGoalPage = (props) => {
       </h2>
       <h1 class="create-challenge-title">Your reward.</h1>
       <h2>
-        I will {props.reward} with {props.moneyAmount}{" "}
+        I will {props.reward} with ${props.moneyAmount}{" "}
       </h2>
       <CarouselButtons key="carousel">
         <CarouselButton key="button1" onClick={handleBackButton}>

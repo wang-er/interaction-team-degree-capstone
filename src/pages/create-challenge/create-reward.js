@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Picture from "../../components/gallery";
 import styled from "styled-components";
 
@@ -34,6 +34,8 @@ const CreateRewardPage = (props) => {
           setReward(inputValue);
         case "moneyAmount":
           setMoneyAmount(inputValue);
+        default:
+          console.log("unknown type");
       }
     };
   };

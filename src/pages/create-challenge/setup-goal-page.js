@@ -25,7 +25,7 @@ export const CarouselButtons = styled.div``;
 const SetUpGoalPage = (props) => {
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
-  const [duration, setDuration] = React.useState("");
+  const [duration, setDuration] = React.useState("week");
   const [endDate, setEndDate] = React.useState("");
 
   useEffect(() => {
@@ -41,9 +41,12 @@ const SetUpGoalPage = (props) => {
         case "frequency":
           setChallengeFrequency(inputValue);
         case "duration":
+          console.log(inputValue);
           setDuration(inputValue);
         case "endDate":
           setEndDate(inputValue);
+        default:
+          console.log("unknown type");
       }
     };
   };
@@ -85,12 +88,10 @@ const SetUpGoalPage = (props) => {
             name="frequency-options"
             onChange={handleInputChange("duration")}
           >
-            <option value="day">day</option>
-            <option value="week" selected>
-              week
-            </option>
-            <option value="month">month</option>
-            <option value="year">year</option>
+            <option>day</option>
+            <option selected="selected">week</option>
+            <option>month</option>
+            <option>year</option>
           </select>
           {"\n"}
           {"\n"}

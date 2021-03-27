@@ -65,7 +65,8 @@ export const CreateChallengeLayout = styled.div`
 const CreateChallengePage = (props) => {
   const [index, setIndex] = React.useState(0);
   const random = Math.floor(Math.random() * 90000) + 10000;
-  const challengeID = `${props.userID}-${random}`;
+  const userID = props.userID;
+  const challengeID = `${userID}-${random}`;
   // setup-goal-page gives these values
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
@@ -76,45 +77,35 @@ const CreateChallengePage = (props) => {
   const [moneyAmount, setMoneyAmount] = React.useState("");
   // motive gives this value
   const [motive, setMotive] = React.useState("");
-
-  //   // Create official challenge object and send to Firebase
-  //   const sendChallengeToFirebase = () => {
-  //     // create random 5 digit number for challenge ID
-  //     const challengeID = Math.floor(Math.random() * 90000) + 10000;
-  //     // actual challenge ID will have user id as prefix
-  //     const actualChallengeID = `${props.userID}-${challengeID}`;
-  //     setChallengeID(actualChallengeID);
-  //     console.log(actualChallengeID);
-  //     db.ref("challenges/" + challengeID).set({
-  //       id: actualChallengeID,
-  //       challengeName: challengeName,
-  //       frequency: frequency,
-  //       duration: duration,
-  //       endDate: endDate,
-  //       reward: reward,
-  //       moneyAmount: moneyAmount,
-  //       motive: motive,
-  //     });
-  //   };
+  // newly created challenge will start at 1
+  const currentDay = 1;
+  const [totalDays, setTotalDays] = React.useState("");
 
   const sendDataToParent = (value, property) => {
     switch (property) {
       case "name":
         setChallengeName(value);
       case "frequency":
+        console.log(`frequency is ${value}`);
         setChallengeFrequency(value);
       case "duration":
+        console.log(`duration is ${value}`);
         setDuration(value);
       case "endDate":
         setEndDate(value);
-      case "index":
-        setIndex(value);
       case "reward":
+        console.log(`reward gets set to ${value}`);
         setReward(value);
       case "moneyAmount":
+        console.log(`moneyAmount gets set to ${value}`);
         setMoneyAmount(value);
       case "motive":
         setMotive(value);
+      case "index":
+        console.log(`index gets set to ${value}`);
+        setIndex(value);
+      default:
+        console.log("unknown type");
     }
   };
 
@@ -136,14 +127,21 @@ const CreateChallengePage = (props) => {
         moneyAmount={moneyAmount}
         motive={motive}
         challengeID={challengeID}
+        userID={userID}
+        currentDay={currentDay}
+        totalDays={totalDays}
       />
     ),
     4: <PaymentDetailsPage sendDataToParent={sendDataToParent} index={index} />,
     // 5: <DepositAnimationPage />,
   };
-  const maxIndex = Object.keys(routes).length - 1;
 
-  return <CreateChallengeLayout>{routes[index]}</CreateChallengeLayout>;
+  return (
+    <CreateChallengeLayout>
+      {console.log(`userID ${userID} and challengeID ${challengeID}`)}
+      {routes[index]}
+    </CreateChallengeLayout>
+  );
 };
 
 export default CreateChallengePage;
