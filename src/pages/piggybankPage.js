@@ -98,14 +98,23 @@ const PiggyBankPage = () => {
                     <DemoImage src={carouselSlidesData[2].imageURL} onClick={rightClick} />
                 </SlideBox>
                 <SlideBox id="4" isOpen={isOpen(4)}>
-                    Congrats! You’ve successfully completed your goal. Go ahead and treat yourself with your reward:
-                    {data.title}
+                    <div>Congrats! You’ve successfully completed your goal. Go ahead and treat yourself with your reward:</div>
+                    <div>{data.title}</div>
                     <CarouselButton isFilled onClick={rightClick}>
                         Claim Reward
                     </CarouselButton>
                 </SlideBox>
                 <SlideBox id="5" isOpen={isOpen(5)}>
+                    <div>What's next?</div>
+                    <div>You can still view this goal under Past Goals.</div>
 
+                    <div>Watch recap of your goal:</div>
+                    <div>Start new goal:</div>
+                    <CarouselButton isFilled>
+                        <Link to={{ pathname: "/home" }}>
+                            Head home
+                        </Link>
+                    </CarouselButton>
                 </SlideBox>
     </BoardingLayout>
 }

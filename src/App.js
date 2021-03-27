@@ -68,56 +68,54 @@ function App() {
     setMapID(map);
   };
 
-  return (
-    <>
-      {" "}
-      {isLoaded && (
-        <Router>
-          <div>
-            <Switch>
-              <Route path="/landing">
-                <LandingPage />
-              </Route>
-              <Route path="/login">
-                <LoginPage onUserUpdate={updateUserID} />
-              </Route>
-              <Route path="/onboarding">
-                <OnboardingPage />
-              </Route>
-              <Route path="/create-account">
-                <CreateAccountPage />
-              </Route>
-              <Route path="/create-account-details">
-                <CreateAccountDetailsPage onUserUpdate={updateUserID} />
-              </Route>
-              <Route path="/map">
-                <MapPage ID={currentMapID} />
-              </Route>
-              <Route path="/account">
-                <AccountPage />
-              </Route>
-              <Route path="/faq">
-                <FAQPage />
-              </Route>
-              <Route path="/settings">
-                <TestList />
-                <ImageUpload />
-              </Route>
-              <Route path="/home">
-                <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
-              </Route>
-              <Route path="/piggy-completion" component={PiggyBankPage}></Route>
-              <Route path="/create-challenge">
+  return (<> {isLoaded &&
+    <Router>
+      <div>
+        <Switch>
+        <Route path="/landing">
+            <LandingPage />
+          </Route>
+          <Route path="/login">
+            <LoginPage onUserUpdate={updateUserID} />
+          </Route>
+          <Route path="/onboarding">
+            <OnboardingPage/>
+          </Route>
+          <Route path="/create-account">
+            <CreateAccountPage/>
+          </Route>
+          <Route path="/create-account-details">
+            <CreateAccountDetailsPage  onUserUpdate={updateUserID}/>
+          </Route>
+          <Route path="/map">
+            <MapPage ID={currentMapID} />
+          </Route>
+          <Route path="/account">
+            <AccountPage />
+          </Route>
+          <Route path="/faq">
+            <FAQPage />
+          </Route>
+          <Route path="/settings">
+            {/* <TestList />
+            <ImageUpload /> */}
+            <FAQPage />
+          </Route>
+          <Route path="/home">
+            <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
+          </Route>
+          <Route path="/piggy-completion" component={PiggyBankPage}>
+          </Route>
+           <Route path="/create-challenge">
                 <CreateChallengePage userID={userID} />
               </Route>
-              <Route path="/">
-                <LandingPage />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      )}
-    </>
+          <Route path="/">
+            <LandingPage/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>}
+  </>
   );
 }
 

@@ -2,17 +2,30 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link, useHistory } from 'react-router-dom';
 import { db } from '../../config';
+import { LayoutDiv } from '../../components/layout';
+import { H3, Body } from '../../components/base/fonts';
+import { Input } from '../../components/base/forms';
+import { Button, HyperLink } from '../../components/base/buttons';
 
 
-export const LandingLayout = styled.div`
-    background-color: #E0E0E0;
-    height: 100vh;
-    overflow: scroll;
+export const CreateAccountLayout = styled(LayoutDiv)`
     z-index: 10000000;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
     padding: 20px;
+`
+
+export const CreateAccountContent = styled.div`
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:  space-evenly;
+    height: 50vh;
+    text-align: center;
 `
 
 export const LandingTitle = styled.div`
@@ -22,22 +35,13 @@ export const LandingTitle = styled.div`
     text-align: center;
 `
 
-export const FieldContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-`
 
-export const Input = styled.input`
-    padding: 10px;
-    margin: 10px 0px;
-    width: 60vw;
-`
 
 export const SignupForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 `
 
 
@@ -58,6 +62,18 @@ export const ErrorMessage = styled.div`
     color: red;
     font-size: 12px;
     visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+`
+
+export const Blurb = styled.span`
+    font-size: 16px !important;
+`
+
+export const BackButton = styled(Link) `
+    width: 24px;
+    height: 24px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
 `
 
 
@@ -88,17 +104,27 @@ const CreateAccountDetailsPage = ({onUserUpdate}) => {
 
 
     return (
-        <LandingLayout>
-            <LandingTitle>
-                What's your phone number?
-            </LandingTitle>
-            <SignupForm onSubmit={sendNewAccount}>
-                <Input type="tel" placeholder="XXX-XXX-XXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
-                <ErrorMessage isOpen={hasError}>Account details already exist! </ErrorMessage>
-                <SignupButton as="input" type="submit" name="submit" value="Sign up"></SignupButton>
-            </SignupForm>
-            <span>Already have an account? <Link to="/login">Log in</Link></span>
-        </LandingLayout>
+        <CreateAccountLayout type="plain">
+            <CreateAccountContent>
+                <H3>
+                    What's your phone number?
+                </H3>
+                <SignupForm onSubmit={sendNewAccount}>
+                    <Input style={{width: "100%"}} shadowed type="tel" placeholder="XXX-XXX-XXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
+                    <ErrorMessage isOpen={hasError}>Account details already exist! </ErrorMessage>
+                    <Button as="input" type="submit" name="submit" value="Send Code"></Button>
+                </SignupForm>
+            {/* <Blurb>
+                <Body>
+                    Already have an account?&nbsp;
+                    <HyperLink to="/login">Log in</HyperLink>
+                </Body>
+            </Blurb> */}
+            </CreateAccountContent>
+            <BackButton to="/create-account">
+                <img src="https://cdn3.iconfinder.com/data/icons/ui-ux-essentials-solid/24/chevron-back-solid-512.png"/>
+            </BackButton>
+        </CreateAccountLayout>
     )
 }
 
