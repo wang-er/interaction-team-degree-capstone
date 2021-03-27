@@ -1,30 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { db } from "../../config";
+import { Button } from "../../components/base/buttons";
+import { ButtonsContainer } from "../onboarding/onboarding";
 
-export const CarouselButton = styled.button`
-  border: none;
-  font-weight: bold;
-  color: ${(props) => (props.isFilled ? "white" : "blue")};
-  padding: 10px;
-  margin-top: 1000px;
-  background-color: ${(props) => (props.isFilled ? "blue" : "transparent")};
-  border: 1px solid blue;
-  border-radius: 3px;
-  margin: 10px;
-  text-decoration: none;
-
-  a {
-    text-decoration: none;
-    color: ${(props) => (props.isFilled ? "white" : "blue")};
-  }
+export const CarouselButton = styled(Button)`
+  margin: 10px 10px;
 `;
 
-export const CarouselButtons = styled.div``;
-
 const ConfirmGoalPage = (props) => {
-  const [phone, setPhone] = useState("");
-
   let handleValues = () => {
     props.sendDataToParent(4, "index");
   };
@@ -74,14 +58,18 @@ const ConfirmGoalPage = (props) => {
       <h2>
         I will {props.reward} with ${props.moneyAmount}{" "}
       </h2>
-      <CarouselButtons key="carousel">
-        <CarouselButton key="button1" onClick={handleBackButton}>
+      <ButtonsContainer key="carousel">
+        <CarouselButton
+          type="secondary"
+          key="button1"
+          onClick={handleBackButton}
+        >
           Back
         </CarouselButton>
-        <CarouselButton isFilled key="button2" onClick={wrapper}>
+        <CarouselButton type="primary" key="button2" onClick={wrapper}>
           Confirm
         </CarouselButton>
-      </CarouselButtons>
+      </ButtonsContainer>
     </>
   );
 };

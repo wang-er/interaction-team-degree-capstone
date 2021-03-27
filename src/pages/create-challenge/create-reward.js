@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Picture from "../../components/gallery";
 import styled from "styled-components";
+import { Button } from "../../components/base/buttons";
+import { ButtonsContainer } from "../onboarding/onboarding";
 
-export const CarouselButton = styled.button`
-  border: none;
-  font-weight: bold;
-  color: ${(props) => (props.isFilled ? "white" : "blue")};
-  padding: 10px;
-  margin-top: 1000px;
-  background-color: ${(props) => (props.isFilled ? "blue" : "transparent")};
-  border: 1px solid blue;
-  border-radius: 3px;
-  margin: 10px;
-  text-decoration: none;
-
-  a {
-    text-decoration: none;
-    color: ${(props) => (props.isFilled ? "white" : "blue")};
-  }
+export const CarouselButton = styled(Button)`
+  margin: 10px 10px;
 `;
-
-export const CarouselButtons = styled.div``;
 
 const CreateRewardPage = (props) => {
   const [reward, setReward] = React.useState("");
@@ -78,14 +64,18 @@ const CreateRewardPage = (props) => {
           {"\n"}
         </p>
       </form>
-      <CarouselButtons key="carousel">
-        <CarouselButton key="button1" onClick={handleBackButton}>
+      <ButtonsContainer>
+        <CarouselButton
+          key="button1"
+          type="secondary"
+          onClick={handleBackButton}
+        >
           Back
         </CarouselButton>
-        <CarouselButton isFilled key="button2" onClick={handleValues}>
+        <CarouselButton type="primary" key="button2" onClick={handleValues}>
           Next
         </CarouselButton>
-      </CarouselButtons>
+      </ButtonsContainer>
     </>
   );
 };

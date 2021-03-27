@@ -1,36 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Picture from "../../components/gallery";
 import styled from "styled-components";
+import { Button } from "../../components/base/buttons";
 
-export const CarouselButton = styled.button`
-  border: none;
-  font-weight: bold;
-  color: ${(props) => (props.isFilled ? "white" : "blue")};
-  padding: 10px;
-  margin-top: 1000px;
-  background-color: ${(props) => (props.isFilled ? "blue" : "transparent")};
-  border: 1px solid blue;
-  border-radius: 3px;
-  margin: 10px;
-  text-decoration: none;
-
-  a {
-    text-decoration: none;
-    color: ${(props) => (props.isFilled ? "white" : "blue")};
-  }
+export const CarouselButton = styled(Button)`
+  margin: 10px 10px;
 `;
-
-export const CarouselButtons = styled.div``;
 
 const SetUpGoalPage = (props) => {
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
   const [duration, setDuration] = React.useState("week");
   const [endDate, setEndDate] = React.useState("");
-
-  useEffect(() => {
-    // Update the document title using the browser API
-  });
 
   let handleInputChange = (property) => {
     return (e) => {
@@ -106,7 +87,12 @@ const SetUpGoalPage = (props) => {
           />
         </p>
       </form>
-      <CarouselButton onClick={handleValues} isFilled key="button2">
+      <CarouselButton
+        type="primary"
+        onClick={handleValues}
+        isFilled
+        key="button2"
+      >
         Next
       </CarouselButton>
     </>
