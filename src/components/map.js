@@ -3,18 +3,22 @@ import styled from "styled-components";
 import MapNode from "./mapNode";
 import { db } from "../config";
 import PiggyBankNode from "./piggyBankNode";
+import background from "../icons/GoalScreen.png";
+
 
 export const MapContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 `;
+
 export const Modal = styled.div`
   z-index: 10000;
   position: absolute;
   top: 0;
   left: 0;
   background: grey;
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   display: ${(props) => (props.isOpen ? "flex" : "none")};

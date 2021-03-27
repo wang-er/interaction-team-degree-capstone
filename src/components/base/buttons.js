@@ -38,7 +38,6 @@ export const Button = styled.button`
     padding: 12px 20px;
     background: ${({ type }) => handleBackgroundColorType(type)};
     border-radius: 5px;
-    margin: 10px;
     text-decoration: none;
 
     a {
@@ -48,9 +47,9 @@ export const Button = styled.button`
 `
 
 export const SmallButton = styled(Button)`
-    box-shadow: "0px 1px 5px #3508081A";
+    box-shadow: 0px 1px 9px #3508081A;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     border-radius: 50px;
     padding: 6px 20px;
 `
@@ -66,7 +65,7 @@ export const HyperLink = styled(Link)`
 export const LoginButton = styled.button`
     border: 1px solid #B5B5B5;
     color: black;
-    font-weight: 700;
+    font-weight: 500;
     font-family: "Work Sans", sans-serif;
     font-size: 16px;
     padding: 12px 15px;

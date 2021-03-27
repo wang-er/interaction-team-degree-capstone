@@ -16,8 +16,10 @@ export const H2 = styled.h2`
 `
 
 export const H3 = styled.h3`
-  font-family: "Poppins", sans-serif;
-  font-size: 36px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 34px;
+  line-height: 40px;
+
   font-weight: 600;
   color: ${props => (props.color ? props.color : purple)};
 `
@@ -39,9 +41,8 @@ export const BodyTitle = styled.p`
 
 export const BodyBold = styled.p`
   font-family: "Work Sans", sans-serif;
-  text-transform: uppercase;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: ${props => (props.color ? props.color : darkPurple)};
 `
 

@@ -4,8 +4,13 @@ import styled from "styled-components";
 import Layout from '../components/layout'
 import { db } from '../config';
 import { Link } from 'react-router-dom';
-import { Button, HyperLink, SmallButton, LoginButton } from '../components/base/buttons';
-import { Input, Select, Label } from '../components/base/forms';
+import { Button, SmallButton } from '../components/base/buttons';
+import { Body, BodyBold, BodyTitle, H1 } from '../components/base/fonts';
+
+
+export const HeaderContainer = styled.div`
+    padding-top: 80px;
+`
 
 export const ChallengesContainer = styled.div`
     display: flex;
@@ -13,85 +18,95 @@ export const ChallengesContainer = styled.div`
     flex-wrap: wrap;
      
     a {
-        width: 50%;
+        width: 100%;
         text-decoration: none;
     }
 `
 
+export const TitleContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0px;
+    margin-top: 30px;
+`
+
 const HomePage = ({ onMapUpdate, user, userID }) => {
     const [challenges, setChallenges] = React.useState({});
+    const [currentChallenges, setCurrentChallenges] = React.useState([]);
+    const [pastChallenges, setPastChallenges] = React.useState([]);
+
+    const [emptyHistory, setEmptyHistory] = React.useState(true);
 
     useEffect(() => {
         db.ref('challenges/').orderByChild('userID').equalTo(userID).on('value', snapshot => {
             var dbChallenges = snapshot.val()
             if (dbChallenges !== undefined && dbChallenges !== null) {
-            setChallenges(dbChallenges);
-        } else {
-            setChallenges({});
-        }
+                setChallenges(dbChallenges);
+                sortChallenges(dbChallenges);
+            } else {
+                setChallenges({});
+            }
         });
     }, []);
 
-    const renderCurrentContent = () => {
+    const sortChallenges = (challenges) => {
+        const newChallengesList = [];
+        const oldChallengesList = [];
         if (challenges !== null || challenges !== undefined || challenges !== {}) {
-          return Object.keys(challenges).map((keyName, i) => (
-            (challenges[keyName].isArchived !== true) ? 
-            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
-                <ChallengeBlock key={i} challenge={challenges[keyName]} />
-            </Link>
-            :
-            <></>
-        ))
-        } 
-      }
+            const challengesKeys = Object.keys(challenges);
 
-      const renderArchivedContent = () => {
-        if (challenges !== null || challenges !== undefined || challenges !== {}) {
-          return Object.keys(challenges).map((keyName, i) => (
-            (challenges[keyName].isArchived === true) ? 
-            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenges[keyName].id)}>
-                <ChallengeBlock key={i} challenge={challenges[keyName]} />
+            for (var key in challengesKeys) {
+                if (challenges[challengesKeys[key]].isArchived !== true) {
+                    newChallengesList.push(challenges[challengesKeys[key]])
+                } else {
+                    oldChallengesList.push(challenges[challengesKeys[key]])
+                }
+            }
+        }
+        setCurrentChallenges(newChallengesList);
+        setPastChallenges(oldChallengesList);
+    }
+
+    const renderCurrentContent = () => {
+        return currentChallenges.map((challenge, i) => (
+            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenge.id)}>
+                <ChallengeBlock key={challenge.id} challenge={challenge} />
             </Link>
-            :
-            <></>
         ))
-        } 
-      }
+    }
+
+
+    const renderArchivedContent = () => {
+        return pastChallenges.map((challenge, i) => (
+            <Link to={{ pathname: "/map" }} onClick={() => onMapUpdate(challenge.id)}>
+                <ChallengeBlock key={challenge.id} challenge={challenge} />
+            </Link>
+        ))
+    }
 
     return (
         <Layout location="home">
-            <div>
-                Goals
-            </div>
-            <Button type="danger">Hello</Button>
-            <SmallButton>huh</SmallButton>
-            <LoginButton>
-                <img src="https://ai.devoteam.com/wp-content/uploads/sites/91/2018/05/google-logo-icon-png-transparent-background.png"/>
-                <div>Continue with Google</div>
-                </LoginButton>
-            <HyperLink type="danger" to="/login">noooo</HyperLink>
-            <Label>
-                <Input shadowed type="checkbox" placeholder="XXX-XXX-XXXX"/>
-                Hello
-            </Label>
-            
-            
-            <Select id="cars" name="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="fiat">Fiat</option>
-                <option value="audi">Audi</option>
-            </Select>
-        <div>
-                Current Goals
-        </div>
+            <Button>Omg hurrah</Button>
+            <HeaderContainer>
+            <H1>Goals</H1>
+            </HeaderContainer>
+            <TitleContainer>
+                <BodyTitle> Current Goals</BodyTitle>
+                <SmallButton>+ Create </SmallButton>
+            </TitleContainer>
+            {(currentChallenges.length !== 0) ?
+                <ChallengesContainer>
+                    {renderCurrentContent()}
+                </ChallengesContainer> : 
+                <BodyBold color="#828282">You don’t have any goals, tap “Create” to make one!</BodyBold> 
+            } 
+            {(pastChallenges.length !== 0) &&
+                <TitleContainer>
+                    <BodyTitle> Past Goals </BodyTitle>
+                </TitleContainer>}
             <ChallengesContainer>
-                {renderCurrentContent()}
-            </ChallengesContainer>
-            <div>
-                Past Goals
-        </div>
-        <ChallengesContainer>
                 {renderArchivedContent()}
             </ChallengesContainer>
         </Layout>

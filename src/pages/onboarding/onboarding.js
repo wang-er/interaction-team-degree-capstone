@@ -2,17 +2,19 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from "styled-components";
+import { Button, HyperLink } from '../../components/base/buttons';
+import { Body, H3 } from '../../components/base/fonts';
+import { purple, teal } from '../../components/base/colors';
 
-export const BoardingLayout = styled.div`
-    background-color: #E0E0E0;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+import { LayoutDiv } from '../../components/layout';
+
+export const BoardingLayout = styled(LayoutDiv)`
     z-index: 10000000;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
 `
 
 export const SlideBox = styled.div`
@@ -23,6 +25,7 @@ export const SlideBox = styled.div`
     justify-content: space-evenly;
     align-items: center;
     transition: all 0.5s;
+    margin-bottom: 130px;
 
     // enter from
     &.fade-enter {
@@ -56,65 +59,14 @@ export const ButtonsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
 
-`
-
-export const NextButton = styled.div`
-    font-weight: bold;
-    color: white;
-    padding: 10px;
-    background-color: blue;
-    border-radius: 3px;
-    margin: 10px;
-`
-
-export const FAQButton = styled.div`
-    font-weight: bold;
-    color: white;
-    padding: 10px;
-    border: 3px solid blue;
-    border-radius: 3px;
-    margin: 10px;
-`
-
-export const SkipButton = styled.div`
-    font-weight: bold;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-`
-
-export const SignupButton = styled.div`
-    font-weight: bold;
-    padding: 10px;
-    margin: 10px;
-`
-
-export const CarouselButton = styled.button` 
-    border: none;
-    font-weight: bold;
-    color: ${props => (props.isFilled ? 'white' : 'blue')};
-    padding: 10px;
-    background-color: ${props => (props.isFilled ? 'blue' : 'transparent')};
-    border: 1px solid blue;
-    border-radius: 3px;
-    margin: 10px;
-    text-decoration: none;
-
-    a {
-        text-decoration: none;
-        color: ${props => (props.isFilled ? 'white' : 'blue')};
-    }
-`
-
-
-export const OnboardingHeader = styled.div`
-    font-size: 30px;
 `
 
 export const OnboardingTextBox = styled.div`
-    align-items: center;
     display: flex;
+    flex-direction: column;
 `
 
 export const DemoImage = styled.img`
@@ -128,21 +80,58 @@ export const CarouselDotList = styled.div`
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    // width: min-content;
+    // margin: auto;
+    margin-bottom: 30px;
 `
 
 export const CarouselDot = styled.div`
     height: 6px;
     width: 6px;
-    background-color:  ${props => (props.isActive ? 'purple' : '#bbb')};
+    background-color:  ${props => (props.isActive ? purple : '#bbb')};
     transition: all 0.2s;
     border-radius: 50%;
     display: inline-block;
     margin: 0px 5px;
 `
 
-export const CarouselButtons = styled.div`
+
+export const CarouselControl = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    bottom: 45px;
 `
 
+export const SkipButton = styled(HyperLink)`
+   margin-top: 20px;
+   visibility: ${({ pageNumber, maxIndex }) => handleButtonAppearance("skip", pageNumber, maxIndex)};
+`
+
+export const CarouselButton = styled(Button)`
+   display: ${({ feature, pageNumber, maxIndex }) => handleButtonAppearance(feature, pageNumber, maxIndex)};
+   margin: 10px 10px;
+`
+
+export const FAQButton = styled(Button)`
+    background: none;
+    border: 1px solid ${teal};
+    color: ${teal};
+    width: max-content;
+    margin: auto;
+    margin-top: 30px;
+`
+
+
+const handleButtonAppearance = (button, pageNumber, maxIndex) => {
+    if(button == "back" && pageNumber == 0) {
+        return "none"
+    } 
+    if (button == "skip" && pageNumber == maxIndex) {
+        return "hidden"
+    }
+}
 
 
 const OnboardingPage = () => {
@@ -200,28 +189,50 @@ const OnboardingPage = () => {
         }
     }
 
-
-    return <BoardingLayout>
+    return <BoardingLayout type="plain">
         <TransitionGroup>
             <CSSTransition key={index}
                 timeout={150}
                 classNames="fade">
                 <SlideBox>
                     <DemoImage src={carouselSlidesData[index].imageURL} />
-                    <OnboardingHeader>{carouselSlidesData[index].title}</OnboardingHeader>
                     <OnboardingTextBox>
-                        {carouselSlidesData[index].content}
+                        <H3>{carouselSlidesData[index].title}</H3>
+                        <br/>
+                        <Body>{carouselSlidesData[index].content}</Body>
+                        {(maxIndex === index) &&
+                        <FAQButton>
+                            View FAQ
+                        </FAQButton>}
                     </OnboardingTextBox>
                 </SlideBox>
             </CSSTransition>
         </TransitionGroup>
-        <CarouselDotList>
-            {carouselSlidesData.map((currElement, currIndex) =>
-                <CarouselDot key={currIndex} isActive={(currIndex == index)} />
+        <CarouselControl>
+            <CarouselDotList>
+                {carouselSlidesData.map((currElement, currIndex) =>
+                    <CarouselDot key={currIndex} isActive={(currIndex == index)} />)}
+            </CarouselDotList>
+            <ButtonsContainer>
+                <CarouselButton type="secondary" onClick={leftClick} feature="back" pageNumber={index} maxIndex={maxIndex}>
+                    Back
+                </CarouselButton>
+                <CarouselButton type="primary" onClick={rightClick}>
+                    {(maxIndex === index) ? 
+                     <Link to={{ pathname: "/create-account" }}>
+                     Get Started
+                    </Link> 
+                    : 
+                    "Next"}
+                    
+                </CarouselButton>
+            </ButtonsContainer>
+            <SkipButton to={{ pathname: "/create-account" }} pageNumber={index} maxIndex={maxIndex}> 
+                Skip
+            </SkipButton>
+        </CarouselControl>
 
-            )}
-        </CarouselDotList>
-        <ButtonsContainer>
+        {/* <ButtonsContainer>
             {(index === 0) &&
                 <CarouselButtons key="carousel">
                     <CarouselButton isFilled key="button2" onClick={rightClick}>
@@ -257,15 +268,11 @@ const OnboardingPage = () => {
                             Get Started
                         </Link>
                     </CarouselButton>
-                    {/* <Link key="button3" to={{ pathname: "/faq" }}>
-                        <FAQButton>
-                            View FAQ
-                            </FAQButton>
-                    </Link> */}
                 </CarouselButtons>}
-        </ButtonsContainer>
+        </ButtonsContainer> */}
     </BoardingLayout>
 }
+
 
 
 export default OnboardingPage
