@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import ChallengeBlock from '../components/challengeBlock';
+import React, { useEffect } from "react";
+import ChallengeBlock from "../components/challengeBlock";
 import styled from "styled-components";
 import Layout from '../components/layout'
 import { db } from '../config';
@@ -21,7 +21,7 @@ export const ChallengesContainer = styled.div`
         width: 100%;
         text-decoration: none;
     }
-`
+
 
 export const TitleContainer = styled.div`
     display: flex;
@@ -94,7 +94,9 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
             </HeaderContainer>
             <TitleContainer>
                 <BodyTitle> Current Goals</BodyTitle>
+        <Link to={{ pathname: "/create-challenge" }}>
                 <SmallButton>+ Create </SmallButton>
+        </Link>
             </TitleContainer>
             {(currentChallenges.length !== 0) ?
                 <ChallengesContainer>
@@ -113,4 +115,5 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
     )
 }
 
-export default HomePage
+
+export default HomePage;

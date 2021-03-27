@@ -37,11 +37,33 @@
   }
 }
 
-/* input[type="file"] {
-  display: none;
-} */
-
 #file-upload-label {
   z-index: 999;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+#create-challenge-button {
+  float: right;
+}
+
+.create-challenge-title {
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.create-challenge-text {
+  margin-left: 20px;
+}
+
+.react-photo-gallery--gallery div {
+  flex-flow: nowrap !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+p {
+  white-space: pre-wrap;
+}
