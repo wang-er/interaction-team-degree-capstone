@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { db } from "../../config";
 import { Button } from "../../components/base/buttons";
 import { ButtonsContainer } from "../onboarding/onboarding";
+import "react-datepicker/dist/react-datepicker.css";
+import * as moment from "moment";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -23,9 +25,9 @@ const ConfirmGoalPage = (props) => {
       id: props.challengeID,
       userID: props.userID,
       title: props.challengeName,
-      frequency: props.frequency,
-      duration: props.duration,
-      endDate: props.endDate,
+      // frequency: props.frequency,
+      // duration: props.duration,
+      // endDate: props.endDate,
       reward: props.reward,
       moneyAmount: props.moneyAmount,
       motive: props.motive,
@@ -52,7 +54,8 @@ const ConfirmGoalPage = (props) => {
       <h1 class="create-challenge-title">Your goal.</h1>
       <h2>
         I want to {props.challengeName} {props.frequency} times a{" "}
-        {props.duration} by {props.endDate}
+        {props.duration} by {""}
+        {moment(props.endDate).format("MM/DD/YYYY")}
       </h2>
       <h1 class="create-challenge-title">Your reward.</h1>
       <h2>

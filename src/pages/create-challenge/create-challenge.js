@@ -77,8 +77,8 @@ const CreateChallengePage = (props) => {
   const [moneyAmount, setMoneyAmount] = React.useState("");
   // motive gives this value
   const [motive, setMotive] = React.useState("");
-  // newly created challenge will start at 1
-  const currentDay = 1;
+  // newly created challenge will start at 0
+  const currentDay = 0;
   const [totalDays, setTotalDays] = React.useState("");
 
   const sendDataToParent = (value, property) => {
@@ -86,18 +86,17 @@ const CreateChallengePage = (props) => {
       case "name":
         setChallengeName(value);
       case "frequency":
-        console.log(`frequency is ${value}`);
         setChallengeFrequency(value);
       case "duration":
-        console.log(`duration is ${value}`);
         setDuration(value);
       case "endDate":
         setEndDate(value);
+      case "totalDays":
+        console.log(`totaldays gets set to ${value}`);
+        setTotalDays(value);
       case "reward":
-        console.log(`reward gets set to ${value}`);
         setReward(value);
       case "moneyAmount":
-        console.log(`moneyAmount gets set to ${value}`);
         setMoneyAmount(value);
       case "motive":
         setMotive(value);

@@ -11,14 +11,9 @@ export const CarouselButton = styled(Button)`
 const MotivePage = (props) => {
   const [motive, setMotive] = useState("");
 
-  let handleInputChange = (property) => {
-    return (e) => {
-      let inputValue = e.target.value;
-      switch (property) {
-        case "motive":
-          setMotive(inputValue);
-      }
-    };
+  let handleInputChange = (e) => {
+    let inputValue = e.target.value;
+    setMotive(inputValue);
   };
 
   let handleValues = () => {
@@ -41,7 +36,7 @@ const MotivePage = (props) => {
         colorScheme="whiteAlpha"
         width="90%"
         placeholder="Write as much (or as little) as you want."
-        onChange={handleInputChange("motive")}
+        onChange={handleInputChange}
       />
       <ButtonsContainer key="carousel">
         <CarouselButton
