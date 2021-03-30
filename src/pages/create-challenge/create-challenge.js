@@ -101,7 +101,6 @@ const CreateChallengePage = (props) => {
       case "motive":
         setMotive(value);
       case "index":
-        console.log(`index gets set to ${value}`);
         setIndex(value);
       default:
         console.log("unknown type");
@@ -135,12 +134,7 @@ const CreateChallengePage = (props) => {
     // 5: <DepositAnimationPage />,
   };
 
-  return (
-    <CreateChallengeLayout>
-      {console.log(`userID ${userID} and challengeID ${challengeID}`)}
-      {routes[index]}
-    </CreateChallengeLayout>
-  );
+  return <CreateChallengeLayout>{routes[index]}</CreateChallengeLayout>;
 };
 
 export default CreateChallengePage;
