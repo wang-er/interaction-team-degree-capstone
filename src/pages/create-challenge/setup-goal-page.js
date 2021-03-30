@@ -17,36 +17,6 @@ const SetUpGoalPage = (props) => {
   const currDate = new Date();
   const [totalDays, setTotalDays] = React.useState(0);
 
-  // useEffect(() => {
-  //   console.log(`State is changing ${duration}`);
-  // }, []);
-
-  // let handleInputChange = (property) => {
-  //   console.log("property");
-  //   return (e) => {
-  //     let inputValue = e.target.value;
-  //     switch (property) {
-  //       case "name":
-  //         setChallengeName(inputValue);
-  //       case "frequency":
-  //         setChallengeFrequency(inputValue);
-  //       // case "duration":
-  //       //   console.log(inputValue);
-  //       //   setDuration(inputValue);
-  //       // case "endDate":
-  //       //   setEndDate(inputValue);
-  //       default:
-  //         console.log("unknown type");
-  //     }
-  //   };
-  // };
-
-  const wrapper = () => {
-    calculateTotalDays().then(handleValues());
-    // await calculateTotalDays();
-    // handleValues();
-  };
-
   let handleValues = () => {
     props.sendDataToParent(challengeName, "name");
     props.sendDataToParent(frequency, "frequency");
@@ -82,10 +52,7 @@ const SetUpGoalPage = (props) => {
       default:
         console.log("calculate total days default");
     }
-    // callback();
     console.log(`totalDays is ${totalDays}`);
-    // handleValues();
-    // }, 3000);
   };
 
   return (
@@ -127,9 +94,7 @@ const SetUpGoalPage = (props) => {
           {"\n"}
           <DatePicker
             selected={endDate}
-            // selected={this.state.endDate}
             onChange={(date) => setEndDate(date)}
-            // onChange={handleInputChange("endDate")}
           />
         </p>
       </form>
