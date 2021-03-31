@@ -15,7 +15,6 @@ const SetUpGoalPage = (props) => {
   const [duration, setDuration] = React.useState("week");
   const [endDate, setEndDate] = React.useState(new Date());
   const currDate = new Date();
-  const [totalDays, setTotalDays] = React.useState(0);
 
   let handleValues = () => {
     props.sendDataToParent(challengeName, "name");
@@ -52,7 +51,6 @@ const SetUpGoalPage = (props) => {
       default:
         console.log("calculate total days default");
     }
-    console.log(`totalDays is ${totalDays}`);
   };
 
   return (
