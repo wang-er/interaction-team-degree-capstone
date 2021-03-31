@@ -7,10 +7,12 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
+  // Button,
   useDisclosure,
   Textarea,
 } from "@chakra-ui/react";
+import { SmallButton, Button } from "./base/buttons";
+
 import { db } from "../config";
 import ImageUpload from "./imageUpload";
 
@@ -48,27 +50,33 @@ function EntryUpload(props) {
 
   return (
     <>
-      <Button colorScheme="blue" size="sm" onClick={onOpen}>
+      <SmallButton onClick={onOpen}>
         Upload Media
-      </Button>
+      </SmallButton>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ImageUpload sendDataToParent={sendDataToParent}></ImageUpload>
-          <ModalHeader>Add a Caption</ModalHeader>
+        <ModalContent  height="100vh" margin="0" borderRadius="0">
+          <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Upload a photo</ModalHeader>
           <ModalCloseButton />
+          <ImageUpload sendDataToParent={sendDataToParent}></ImageUpload>
           <ModalBody>
+            
             {/* <Text mb="8px">Value: {value}</Text> */}
-            <Textarea
+            <Textarea  marginTop="20px"
               value={caption}
               onChange={handleInputChange}
-              placeholder="Document here..."
-              size="sm"
+              placeholder="How are you feeling? What went well? What can you improve on?"
+              padding="0"
+              fontFamily="Work Sans"
+              outline="none"
+              border="none"
+              _focus={{border: "none"}}
+              _placeholder={{ color: '#776E81' }}
             />
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="green" onClick={sendEntryToFirebase}>
+          <ModalFooter justifyContent="center">
+            <Button  onClick={sendEntryToFirebase}>
               Save
             </Button>
           </ModalFooter>

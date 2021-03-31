@@ -88,7 +88,6 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
 
     return (
         <Layout location="home">
-            <Button>Omg hurrah</Button>
             <HeaderContainer>
             <H1>Goals</H1>
             </HeaderContainer>

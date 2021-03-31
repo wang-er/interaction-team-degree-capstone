@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { storage } from "../config";
 import EntryUpload from "./entryUpload";
 import TextUpload from "./textUpload";
@@ -14,6 +15,23 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/react";
+import BackgroundImage from "../icons/EntryButton.png"
+
+
+
+export const MapPopover = styled(Popover)`
+color: purple;
+`
+
+export const MapPopoverContent = styled(PopoverContent)`
+background-color: white!important;
+border: none!important;
+border-radius: 25px!important;
+`
+
+export const MapPopoverHeader = styled(PopoverHeader)`
+color: purple;
+`
 
 class EntryPopupMenu extends React.Component {
   constructor(props) {
@@ -62,15 +80,14 @@ class EntryPopupMenu extends React.Component {
   render() {
     return (
       <>
-        <Popover>
+        <MapPopover>
           <PopoverTrigger>
-            <Button>➕</Button>
+            <Button backgroundSize="cover" right="1px" backgroundImage={`url(${BackgroundImage})`} _hover={{ backgroundImage: `url(${BackgroundImage})`}} _focus={{ backgroundImage: `url(${BackgroundImage})`}}  _active={{ backgroundImage: `url(${BackgroundImage})`}}></Button>
           </PopoverTrigger>
-          <PopoverContent width="200px">
-            <PopoverHeader>Document!</PopoverHeader>
+          <MapPopoverContent width="max-content" left="-56px" top="10px">
+            {/* <MapPopoverHeader>Document!</MapPopoverHeader> */}
             <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverBody>
+            <PopoverBody padding="12px">
               <Stack>
                 <CameraUpload
                   challengeID={this.props.challengeID}
@@ -86,8 +103,8 @@ class EntryPopupMenu extends React.Component {
                 ></TextUpload>
               </Stack>
             </PopoverBody>
-          </PopoverContent>
-        </Popover>
+          </MapPopoverContent>
+        </MapPopover>
       </>
     );
   }

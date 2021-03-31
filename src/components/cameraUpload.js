@@ -7,12 +7,14 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   useDisclosure,
   Textarea,
+  // Button
 } from "@chakra-ui/react";
 import { db } from "../config";
 import WebCam from "./webCam";
+import { SmallButton, Button } from "./base/buttons";
+
 
 // This function component is responsible for uploading a photo as an entry.
 // Parent of Webcam component.
@@ -48,27 +50,32 @@ function CameraUpload(props) {
 
   return (
     <>
-      <Button colorScheme="blue" size="sm" onClick={onOpen}>
+      <SmallButton onClick={onOpen}>
         Camera
-      </Button>
+      </SmallButton>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <br></br>
-          <WebCam sendDataToParent={sendDataToParent}></WebCam>
-          <ModalHeader>Add a Caption</ModalHeader>
+        <ModalContent  height="100vh" margin="0" borderRadius="0">
+          <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Take a photo</ModalHeader>
           <ModalCloseButton />
+          <WebCam sendDataToParent={sendDataToParent}></WebCam>
+
           <ModalBody>
-            <Textarea
+            <Textarea  marginTop="20px"
               value={caption}
               onChange={handleInputChange}
-              placeholder="Document here..."
-              size="sm"
+              placeholder="How are you feeling? What went well? What can you improve on?"
+              padding="0"
+              fontFamily="Work Sans"
+              outline="none"
+              border="none"
+              _focus={{border: "none"}}
+              _placeholder={{ color: '#776E81' }}
             />
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="green" onClick={sendEntryToFirebase}>
+          <ModalFooter justifyContent="center">
+            <Button onClick={sendEntryToFirebase}>
               Save
             </Button>
           </ModalFooter>

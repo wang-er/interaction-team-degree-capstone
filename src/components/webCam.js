@@ -1,6 +1,20 @@
 import React from "react";
 import * as Webcam from "react-webcam";
 import { Button } from "@chakra-ui/react";
+import { SmallButton } from "./base/buttons"
+import styled from "styled-components";
+
+export const WebcamDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
+
+export const ButtonDiv = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-top: 25px;
+`
 
 class WebCam extends React.Component {
   constructor(props) {
@@ -37,10 +51,9 @@ class WebCam extends React.Component {
     };
 
     return (
-      <div>
-        <br></br>
+      <>
         {this.state.hideCam == false ? (
-          <div>
+          <WebcamDiv>
             <Webcam
               audio={false}
               height={350}
@@ -49,15 +62,19 @@ class WebCam extends React.Component {
               width={500}
               videoConstraints={videoConstraints}
             />
-            <Button onClick={this.capture.bind(this)}>Capture photo</Button>
-          </div>
+            <ButtonDiv>
+              <SmallButton onClick={this.capture.bind(this)}>Capture photo</SmallButton>
+            </ButtonDiv>
+          </WebcamDiv>
         ) : (
-          <div>
+          <WebcamDiv>
             <img src={this.state.screenshot} height={500} />
-            <Button onClick={this.showWebCam.bind(this)}>Retake</Button>
-          </div>
+            <ButtonDiv>
+              <SmallButton onClick={this.showWebCam.bind(this)}>Retake</SmallButton>
+            </ButtonDiv>
+          </WebcamDiv>
         )}
-      </div>
+      </>
     );
   }
 }
