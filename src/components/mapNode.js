@@ -79,13 +79,12 @@ export const ModalImg = styled.img`
 
 const MapNode = ({ data, challengeID }) => {
   const [isOpen, setIsOpen] = React.useState(false);
-
   //SIN CURVES YEAH
 
   //data.id is to generate curves :)
   const strength = 90;
   const curveStrength = 0.4;
-  const xPosition = Math.sin(data.id / (curveStrength * Math.PI)) * strength;
+  const xPosition = Math.sin(data.day / (curveStrength * Math.PI)) * strength;
   var yPosition = 0;
   const hasData = data.state === "past";
   const toggleModal = () => setIsOpen(!isOpen);

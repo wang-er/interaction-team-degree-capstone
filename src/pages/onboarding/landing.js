@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+import { H1 } from '../../components/base/fonts';
+import { Layout, LayoutDiv } from '../../components/layout';
+import { Button, HyperLink} from '../../components/base/buttons';
 
-export const LandingLayout = styled.div`
-    background-color: #E0E0E0;
-    height: 100vh;
-    overflow: scroll;
+
+export const LandingLayout = styled(LayoutDiv)`
     z-index: 10000000;
     display: flex;
     flex-direction: column;
@@ -13,15 +14,12 @@ export const LandingLayout = styled.div`
     align-items: center;
 `
 
-export const LandingTitle = styled.div`
-    font-weight: bold;
-    font-size: 30px;
-`
-
 export const ButtonsContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: 100px;
 
 `
 
@@ -43,21 +41,15 @@ export const LoginButton = styled.div`
 
 const LandingPage = () => {
     return (
-        <LandingLayout>
-            <LandingTitle>
-                Centiv
-            </LandingTitle>
+        <LandingLayout type={"plain"}>
+            <H1>Centiv</H1>
             <ButtonsContainer>
-                <Link to={{ pathname: "/onboarding" }}>
-                    <SignupButton>
-                        Sign up
-                    </SignupButton>
-                </Link>
-                <Link to={{ pathname: "/login" }}>
-                    <LoginButton>
-                        log in
-                    </LoginButton>
-                </Link>
+                <Button>
+                    <Link to={{ pathname: "/onboarding" }}> Sign up </Link>
+                </Button>
+                <HyperLink to={{ pathname: "/login" }}>
+                    Log in
+                </HyperLink>
             </ButtonsContainer>
         </LandingLayout>
     )

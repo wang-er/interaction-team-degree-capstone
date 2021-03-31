@@ -17,8 +17,8 @@ const MapPage = ({ ID }) => {
   }, []);
 
   return (
-    <Layout>
-      {isLoaded && <Map data={currentMap} />}
+    <Layout type="map" location="home">
+      {isLoaded && <Map data={currentMap} id={ID} />}
     </Layout>
   )
 }

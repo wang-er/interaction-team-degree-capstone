@@ -1,40 +1,39 @@
-import './App.css';
-import TestList from './components/test-list'
-import MapPage from './pages/map-screen'
-import HomePage from './pages/home'
+import "./App.css";
+import TestList from "./components/test-list";
+import MapPage from "./pages/map-screen";
+import HomePage from "./pages/home";
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import Navigation from './components/navigation';
-import AccountPage from './pages/account';
-import FAQPage from './pages/faq';
-import SettingsPage from './pages/settings';
-import { db } from './config';
-import LandingPage from './pages/onboarding/landing';
-import OnboardingPage from './pages/onboarding/onboarding';
-import CreateAccountPage from './pages/onboarding/new-user';
-import CreateAccountDetailsPage from './pages/onboarding/create-account';
-import LoginPage from './pages/onboarding/login';
-import ImageUpload from './components/imageUpload';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navigation from "./components/navigation";
+import AccountPage from "./pages/account";
+import FAQPage from "./pages/faq";
+import SettingsPage from "./pages/settings";
+import { db } from "./config";
+import LandingPage from "./pages/onboarding/landing";
+import OnboardingPage from "./pages/onboarding/onboarding";
+import CreateAccountPage from "./pages/onboarding/new-user";
+import CreateAccountDetailsPage from "./pages/onboarding/create-account";
+import LoginPage from "./pages/onboarding/login";
+import ImageUpload from "./components/imageUpload";
+import PiggyBankPage from "./pages/piggybankPage";
+import CreateChallengePage from "./pages/create-challenge/create-challenge";
 
 function App() {
   const [user, setUser] = React.useState({});
 
   const [userID, setUserID] = React.useState("");
-  const updateUserID = id => {
-    console.log("USER ID "  + id);
+  const updateUserID = (id) => {
+    console.log("USER ID " + id);
     setUserID(id);
-  }
+  };
 
   const [isLoaded, setIsLoaded] = React.useState(false);
 
   //get current User
   useEffect(() => {
-    if(userID != "") {
-      db.ref(`users/${userID}`).on('value', snapshot => { //HARDCODED TODO
+    if (userID != "") {
+      db.ref(`users/${userID}`).on("value", (snapshot) => {
+        //HARDCODED TODO
         const user = snapshot.val();
         console.log(user);
         console.log("I FOUND MY DATA" + userID);
@@ -42,7 +41,7 @@ function App() {
         setIsLoaded(true);
         // preloadChallenge(user);
       });
-    }  else {
+    } else {
       console.log(user);
       setIsLoaded(true);
     }
@@ -98,12 +97,18 @@ function App() {
             <FAQPage />
           </Route>
           <Route path="/settings">
-            <TestList />
-            <ImageUpload />
+            {/* <TestList />
+            <ImageUpload /> */}
+            <FAQPage />
           </Route>
           <Route path="/home">
             <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
           </Route>
+          <Route path="/piggy-completion" component={PiggyBankPage}>
+          </Route>
+           <Route path="/create-challenge">
+                <CreateChallengePage userID={userID} />
+              </Route>
           <Route path="/">
             <LandingPage/>
           </Route>

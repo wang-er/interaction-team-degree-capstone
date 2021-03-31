@@ -3,24 +3,42 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link, useHistory } from 'react-router-dom';
 import { db } from '../../config';
+import { LayoutDiv } from '../../components/layout';
+import { H3, Body } from '../../components/base/fonts';
+import { LoginButton, HyperLink, Button } from '../../components/base/buttons';
+import { Input } from '../../components/base/forms';
 
-export const LandingLayout = styled.div`
-    background-color: #E0E0E0;
-    height: 100vh;
-    overflow: scroll;
+
+export const LoginLayout = styled(LayoutDiv)`
     z-index: 10000000;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     padding: 0px 20px;
+    justify-content:  center;
+
 `
 
-export const LandingTitle = styled.div`
-    font-weight: bold;
-    font-size: 30px;
-    padding: 50px;
+export const LoginContent = styled.div`
+    margin-bottom: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:  space-evenly;
+    height: 50vh;
+    text-align: center;
+    width: 100%;
+
 `
+
+export const LoginOptions = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    bottom: 45px;
+`
+
 
 export const ButtonsContainer = styled.div`
     display: flex;
@@ -30,42 +48,22 @@ export const ButtonsContainer = styled.div`
     margin-bottom: 40px;
 `
 
-export const Input = styled.input`
-    padding: 10px;
-    margin: 10px 0px;
-
-`
 
 export const LoginForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-`
-
-
-export const LoginButton = styled(Link)`
-    font-weight: bold;
-    color: white;
-    padding: 10px;
-    background-color: blue;
-    border-radius: 3px;
-    margin: 10px;
-    text-decoration: none;
-    text-align: center;
-
-`
-
-
-export const SignupButton = styled(LoginButton)`
-    border: 2px solid blue;
-    background-color: unset;
-    color: blue; 
+    width: 80%;
 `
 
 export const ErrorMessage = styled.div`
     color: red;
     font-size: 12px;
     visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+`
+
+export const Blurb = styled.span`
+    font-size: 16px !important;
 `
 
 
@@ -91,18 +89,37 @@ const LoginPage = ({onUserUpdate}) => {
 
 
     return (
-        <LandingLayout>
-            <LandingTitle>
-                Login.
-            </LandingTitle>
-            <LoginForm onSubmit={findLogin}>
-                <Input type="tel" placeholder="XXX-XXX-XXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
-                <ErrorMessage isOpen={hasError}>Couldn't find your number! </ErrorMessage>
-                <LoginButton as="input" type="submit" name="submit" value="Log in"></LoginButton>
-            </LoginForm>
+        <LoginLayout type="plain">
+            <LoginContent>
+                <H3> Login. </H3>
+                <LoginForm onSubmit={findLogin}>
+                    <Input Input style={{width: "100%"}} shadowed type="tel" placeholder="XXX-XXX-XXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
+                    <ErrorMessage isOpen={hasError}>Couldn't find your number! </ErrorMessage>
+                    <Button as="input" type="submit" name="submit" value="Log in"></Button>
+                </LoginForm>
+            </LoginContent>
+            <LoginOptions>
+                <ButtonsContainer>
+                    <LoginButton>
+                        <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-facebook-circle-512.png" />
+                        <div> Continue with Facebook </div>
+                    </LoginButton>
+                    <LoginButton>
+                        <img src="http://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png" />
+                        <div> Continue with Google</div>
+                    </LoginButton>
+                </ButtonsContainer>
+                <Blurb>
+                    <Body>
+                       Don't have an account?&nbsp;
+                        <HyperLink to="/create-account">Sign uo</HyperLink>
+                    </Body>
+                </Blurb>
+            </LoginOptions>
 
 
-            <Link to="#">Forgot Password</Link>
+
+            {/* <Link to="#">Forgot Password</Link>
             <ButtonsContainer>
                 <SignupButton to={{ pathname: "/onboarding" }}>
                     Login with Facebook
@@ -111,9 +128,9 @@ const LoginPage = ({onUserUpdate}) => {
                     Login with Google
                 </SignupButton>
                 <span>Don't have an account? <Link to="/create-account">Sign up</Link></span>
-            </ButtonsContainer>
+            </ButtonsContainer> */}
 
-        </LandingLayout>
+        </LoginLayout>
     )
 }
 
