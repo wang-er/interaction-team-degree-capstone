@@ -14,6 +14,11 @@ import {
 import { db } from "../config";
 import WebCam from "./webCam";
 import { SmallButton, Button } from "./base/buttons";
+import styled from "styled-components";
+
+// export const CameraUploadDiv = styled.div`
+//   z-index: 10000000;
+// `
 
 
 // This function component is responsible for uploading a photo as an entry.
@@ -55,7 +60,6 @@ function CameraUpload(props) {
       </SmallButton>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
         <ModalContent  height="100vh" margin="0" borderRadius="0">
           <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Take a photo</ModalHeader>
           <ModalCloseButton />

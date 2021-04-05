@@ -3,13 +3,103 @@ import styled from "styled-components";
 import MapNode from "./mapNode";
 import { db } from "../config";
 import PiggyBankNode from "./piggyBankNode";
-import background from "../icons/GoalScreen.png";
+import EditIcon from "../icons/Edit.svg";
+import StarIcon from "../icons/Star.svg";
+import BackIcon from "../icons/Back.svg";
+import { white } from "./base/colors";
+import { Link } from "react-router-dom";
 
+export const MapOverlay = styled.div`
+    width: 100vw;
+    height: 140px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0,0,0,1), rgba(255,0,0,0));
+    // backdrop-filter: blur(6px);
+
+    z-index: 1000;
+`
+
+export const BackButton = styled(Link)`
+    position: fixed;
+    top: 25px;
+    left: 18px;
+    width: 25px;
+    img {
+      
+    }
+    z-index: 1000;
+    // font-size: 20px;
+    // color: ${white};
+`
+
+export const DayTracker = styled.div`
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Work Sans", sans-serif;
+    text-transform: uppercase;
+    color: #EAE3FF;
+`
+export const ChallengeName = styled.div`
+    font-size: 18px;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    color: ${white};
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-left: 5px;
+      width: 17px;
+      height: 17px;
+  }
+`
+
+export const Reward = styled.div`
+    box-shadow: 0px 1px 9px #3508081A;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+    border-radius: 50px;
+    padding: 6px 20px;
+    border: none;
+    margin-top: 10px;
+
+    color: #240D68;
+    background: ${white};
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+    }
+    div {
+        width: 100%;
+        margin-left: 5px;
+    }
+`
 
 export const MapContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  margin-top: 100px;
 `;
 
 export const Modal = styled.div`
@@ -108,10 +198,28 @@ const Map = ({ data, id }) => {
   //rendering
   return (
     <>
+      <MapOverlay>
+        <ChallengeName>
+          {data.title}
+          <img src={EditIcon}/>
+        </ChallengeName>
+        <DayTracker>
+          {data.currentDay} / {data.totalDays}
+        </DayTracker>
+        <Reward>
+          <img src={StarIcon}/>
+          <div> <b>REWARD:</b> {data.reward}</div>
+         
+        </Reward>
+      </MapOverlay>
+      <BackButton to="/home">
+        <img src={BackIcon}/>
+      </BackButton>
+      <BackButton src={BackIcon}/>
       <MapContainer>
         {isLoaded &&
           mapNodeList.map((node) => {
-            return <MapNode data={node} challengeID={data.id} />;
+            return <MapNode data={node} challengeID={data.id} totalDay={data.totalDays} />;
           })}
           {isLoaded && <PiggyBankNode data={data} id={id}/>}
       </MapContainer>

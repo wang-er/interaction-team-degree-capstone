@@ -30,7 +30,6 @@ border-radius: 25px!important;
 `
 
 export const MapPopoverHeader = styled(PopoverHeader)`
-color: purple;
 `
 
 class EntryPopupMenu extends React.Component {

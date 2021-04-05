@@ -54,7 +54,7 @@ export const ButtonCircle = styled.div`
 
     border: 5px solid white;
   box-sizing: border-box;
-  box-shadow: 0 3px 4px grey;
+  box-shadow: 0 2px 6px #3508083A;
 `;
 
 export const ButtonText = styled.div`
@@ -95,7 +95,7 @@ export const ModalImg = styled.img`
   // width: 30%;
 `;
 
-const MapNode = ({ data, challengeID }) => {
+const MapNode = ({ data, challengeID, totalDay }) => {
   // const [isOpen, setIsOpen] = React.useState(false);
   //SIN CURVES YEAH
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -139,7 +139,7 @@ const MapNode = ({ data, challengeID }) => {
           <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent  height="100vh" margin="0" borderRadius="0">
-            <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Entry {data.day}/{data.day}</ModalHeader>
+            <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Entry {data.day + 1}/{totalDay}</ModalHeader>
             <ModalCloseButton />
             <ImageDiv>
                 <ModalImg src={data.object.imgUrl}/>
