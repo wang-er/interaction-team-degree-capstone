@@ -86,34 +86,31 @@ const HomePage = ({ onMapUpdate, user, userID }) => {
       </Link>
     ));
   };
-
-  return (
-    <Layout location="home">
-      <Button>Omg hurrah</Button>
-      <HeaderContainer>
-        <H1>Goals</H1>
-      </HeaderContainer>
-      <TitleContainer>
-        <BodyTitle> Current Goals</BodyTitle>
-        <Link to={{ pathname: "/create-challenge" }}>
-          <SmallButton>+ Create </SmallButton>
-        </Link>
-      </TitleContainer>
-      {currentChallenges.length !== 0 ? (
-        <ChallengesContainer>{renderCurrentContent()}</ChallengesContainer>
-      ) : (
-        <BodyBold color="#828282">
-          You don’t have any goals, tap “Create” to make one!
-        </BodyBold>
-      )}
-      {pastChallenges.length !== 0 && (
-        <TitleContainer>
-          <BodyTitle> Past Goals </BodyTitle>
-        </TitleContainer>
-      )}
-      <ChallengesContainer>{renderArchivedContent()}</ChallengesContainer>
-    </Layout>
-  );
-};
-
+    return (
+        <Layout location="home">
+            <HeaderContainer>
+            <H1>Goals</H1>
+            </HeaderContainer>
+            <TitleContainer>
+                <BodyTitle> Current Goals</BodyTitle>
+                <Link to={{ pathname: "/create-challenge" }}>
+                    <SmallButton>+ Create </SmallButton>
+                </Link>
+            </TitleContainer>
+            {(currentChallenges.length !== 0) ?
+                <ChallengesContainer>
+                    {renderCurrentContent()}
+                </ChallengesContainer> : 
+                <BodyBold color="#828282">You don’t have any goals, tap “Create” to make one!</BodyBold> 
+            } 
+            {(pastChallenges.length !== 0) &&
+                <TitleContainer>
+                    <BodyTitle> Past Goals </BodyTitle>
+                </TitleContainer>}
+            <ChallengesContainer>
+                {renderArchivedContent()}
+            </ChallengesContainer>
+        </Layout>
+    )
+}
 export default HomePage;

@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { db } from "../config";
 import { Link, useHistory } from 'react-router-dom';
+import PiggyImage from '../icons/Piggy.png'
+import PiggyCompleted from '../icons/PiggyCompleted.svg'
+
 
 
 
@@ -20,8 +23,19 @@ export const ButtonCircle = styled.div`
   overflow: hidden;
   border: 5px solid white;
   box-sizing: border-box;
-  box-shadow: 0 3px 4px grey;
+  box-shadow: 0 2px 6px #3508083A;
+  // background-image: url(${PiggyImage});
+  background: ${props => (props.isCompleted ? `linear-gradient(#513574 -10%, #272D68 110%)` : "#EFEFEF")}; 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
+export const ButtonImage = styled.img`
+  width: 50px;
+`;
+
 
 export const ButtonText = styled.div`
   display: flex;
@@ -59,7 +73,6 @@ export const ModalImg = styled.img`
 
 
 const PiggyBankNode = ({ data, id }) => {
-    const [isOpen, setIsOpen] = React.useState(false);
     const history = useHistory();
 
     const completeChallenge = (event) => {
@@ -77,7 +90,8 @@ const PiggyBankNode = ({ data, id }) => {
 
     return (
         <NodeContainer onClick={completeChallenge}>
-            <ButtonCircle>
+            <ButtonCircle isCompleted={data.currentDay == data.totalDays}>
+              <ButtonImage src={(data.currentDay == data.totalDays) ? PiggyCompleted : PiggyImage}/>
             </ButtonCircle>
         </NodeContainer>
     );

@@ -7,11 +7,12 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
+  // Button,
   useDisclosure,
   Textarea,
   Text,
 } from "@chakra-ui/react";
+import { SmallButton, Button } from "./base/buttons";
 import { db } from "../config";
 
 // This function component is responsible for uploading a text entry
@@ -40,29 +41,34 @@ function TextUpload(props) {
 
   return (
     <>
-      <Button colorScheme="blue" size="sm" onClick={onOpen}>
+      <SmallButton small onClick={onOpen}>
         Text Entry
-      </Button>
+      </SmallButton>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Text Entry</ModalHeader>
+        <ModalContent  height="100vh" margin="0" borderRadius="0">
+          <ModalHeader fontFamily="Work Sans" textTransform="uppercase">Text Entry</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text mb="10px">
+            {/* <Text mb="10px">
               Describe your progress and take time to reflect. How are you
               feeling? What went well? What can you improve on?
-            </Text>
+            </Text> */}
             <Textarea
               value={caption}
               onChange={handleInputChange}
-              placeholder="Document here..."
-              size="sm"
+              placeholder="How are you feeling? What went well? What can you improve on?"
+              padding="0"
+              fontFamily="Work Sans"
+              outline="none"
+              border="none"
+              _focus={{border: "none"}}
+              _placeholder={{ color: '#776E81' }}
             />
           </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="green" onClick={sendEntryToFirebase}>
+          <ModalFooter justifyContent="center">
+            <Button onClick={sendEntryToFirebase}>
               Save
             </Button>
           </ModalFooter>

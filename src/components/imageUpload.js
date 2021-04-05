@@ -1,6 +1,24 @@
 import React, { Component } from "react";
 import { storage } from "../config";
 import { Button, Image } from "@chakra-ui/react";
+import { SmallButton } from "./base/buttons"
+import styled from "styled-components";
+
+
+export const ImageDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`
+
+export const ButtonDiv = styled.div`
+  justify-content: center;
+  display: flex;
+  margin-top: 25px;
+`
+export const HiddenInput = styled.input`
+  display: none;
+`
 
 // Credit to Github user @ClintPy for Image-Uploader-React-Firebase
 // This class is used by EntryUpload which is for uploading a photo as an entry.
@@ -61,17 +79,20 @@ class ImageUpload extends Component {
 
   render(props) {
     return (
-      <>
-        <Image src={this.state.url || "https://via.placeholder.com/150"} />
+      <ImageDiv>
+        <label for="file-upload">
+          <Image objectFit="cover" src={this.state.url || "https://i.stack.imgur.com/y9DpT.jpg"} />
+        </label>
+        
         {console.log(this.state.url)}
-        <input type="file" id="file-upload" onChange={this.handleChange} />
-        <Button
-          onClick={this.handleUpload}
-          className="waves-effect waves-light btn"
-        >
-          Upload
-        </Button>
-      </>
+        <HiddenInput type="file" id="file-upload" onChange={this.handleChange} />
+        <ButtonDiv>
+          <SmallButton
+            onClick={this.handleUpload}>
+            Upload
+          </SmallButton>
+         </ButtonDiv>
+      </ImageDiv>
     );
   }
 }
