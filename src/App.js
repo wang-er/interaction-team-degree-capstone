@@ -17,6 +17,7 @@ import LoginPage from "./pages/onboarding/login";
 import ImageUpload from "./components/imageUpload";
 import PiggyBankPage from "./pages/piggybankPage";
 import CreateChallengePage from "./pages/create-challenge/create-challenge";
+import WalletPage from "./pages/wallet";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -89,6 +90,9 @@ function App() {
           </Route>
           <Route path="/map">
             <MapPage ID={currentMapID} />
+          </Route>
+          <Route path="/wallet">
+            <WalletPage />
           </Route>
           <Route path="/account">
             <AccountPage />

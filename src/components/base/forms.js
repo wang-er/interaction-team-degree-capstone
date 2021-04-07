@@ -14,7 +14,7 @@ export const Input = styled.input`
     font-size: 14px;
     padding:  ${props => (props.small ? "6px 15px" : "12px 15px")}; 
     border-radius: 5px;
-    margin: 10px;
+    // margin: 10px;
     text-decoration: none;
     outline-color: ${lightPurple};
     width: ${props => (props.type == "checkbox" ? "30px" : "initial")};
