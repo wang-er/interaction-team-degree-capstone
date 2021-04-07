@@ -7,6 +7,7 @@ import { LayoutDiv } from "../../components/layout";
 import { H3, Body } from "../../components/base/fonts";
 import { Input } from "../../components/base/forms";
 import { CloseButton } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -60,12 +61,9 @@ const CreateRewardPage = (props) => {
 
   return (
     <NewChallengeLayout type="plain">
-      <CloseButton
-        class="close-button"
-        size="md"
-        paddingLeft="350px"
-        onClick={() => alert("implement")}
-      />
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
       <H3>Let’s motivate you with a reward.</H3>
       <Body>
         Specify a reward and how much money you will spend on it. You can also

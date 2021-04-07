@@ -8,6 +8,7 @@ import { H3, Body } from "../../components/base/fonts";
 import { LoginButton, HyperLink, Button } from "../../components/base/buttons";
 import { Input } from "../../components/base/forms";
 import { CloseButton } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -77,12 +78,9 @@ const SetUpGoalPage = (props) => {
 
   return (
     <NewChallengeLayout type="plain">
-      <CloseButton
-        class="close-button"
-        size="md"
-        paddingLeft="350px"
-        onClick={() => alert("implement")}
-      />
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
 
       <H3 class="create-challenge-title">Let’s set up a goal.</H3>
       <Body>Swipe through some ideas if you can’t think of anything.</Body>

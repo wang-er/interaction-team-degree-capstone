@@ -7,6 +7,7 @@ import { H3, Body } from "../../components/base/fonts";
 import { Input } from "../../components/base/forms";
 import { CloseButton } from "@chakra-ui/react";
 import { LayoutDiv } from "../../components/layout";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -48,12 +49,9 @@ const MotivePage = (props) => {
   };
   return (
     <NewChallengeLayout type="plain">
-      <CloseButton
-        class="close-button"
-        size="md"
-        paddingLeft="350px"
-        onClick={() => alert("implement")}
-      />
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
       <H3>Why do you want to accomplish this goal?</H3>
       <Body>
         Thinking about your motive will help you stick with your goal!

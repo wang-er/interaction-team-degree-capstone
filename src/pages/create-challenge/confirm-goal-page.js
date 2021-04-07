@@ -9,6 +9,7 @@ import { H3, H4, Body } from "../../components/base/fonts";
 import { CloseButton } from "@chakra-ui/react";
 import { LayoutDiv } from "../../components/layout";
 import { darkPurple } from "../../components/base/colors";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -65,12 +66,9 @@ const ConfirmGoalPage = (props) => {
 
   return (
     <NewChallengeLayout type="plain">
-      <CloseButton
-        class="close-button"
-        size="md"
-        paddingLeft="350px"
-        onClick={() => alert("implement")}
-      />
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
       <H3>Confirm your goal.</H3>
       <Body>
         Make sure all your info is correct, then you can set up your payment
