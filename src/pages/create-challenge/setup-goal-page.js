@@ -1,12 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Picture from "../../components/gallery";
 import styled from "styled-components";
-import { Button } from "../../components/base/buttons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { LayoutDiv } from "../../components/layout";
+import { H3, Body } from "../../components/base/fonts";
+import { LoginButton, HyperLink, Button } from "../../components/base/buttons";
+import { Input } from "../../components/base/forms";
+import { CloseButton } from "@chakra-ui/react";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
+`;
+
+export const NewChallengeLayout = styled(LayoutDiv)`
+  z-index: 10000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+  justify-content: center;
+`;
+
+export const ButtonsContainer = styled.div`
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 const SetUpGoalPage = (props) => {
@@ -54,23 +76,28 @@ const SetUpGoalPage = (props) => {
   };
 
   return (
-    <>
-      <h1 class="create-challenge-title">Let’s set up a goal.</h1>
-      <p class="create-challenge-text">
-        Swipe through some ideas if you can’t think of anything.
-      </p>
+    <NewChallengeLayout type="plain">
+      <CloseButton
+        class="close-button"
+        size="md"
+        paddingLeft="350px"
+        onClick={() => alert("implement")}
+      />
+
+      <H3 class="create-challenge-title">Let’s set up a goal.</H3>
+      <Body>Swipe through some ideas if you can’t think of anything.</Body>
       <Picture />
       <form>
-        <p>
+        <Body>
           I want to{" "}
-          <input
+          <Input
             type="text"
             name="challenge-name"
             onChange={(e) => setChallengeName(e.target.value)}
           />{" "}
           {"\n"}
           {"\n"}
-          <input
+          <Input
             type="text"
             size="8"
             name="challenge-frequency"
@@ -78,6 +105,7 @@ const SetUpGoalPage = (props) => {
           />{" "}
           times a{" "}
           <select
+            style={{ border: "1px solid #B5B5B5" }}
             id="frequency-options"
             name="frequency-options"
             onChange={(d) => setDuration(d.target.value)}
@@ -94,17 +122,19 @@ const SetUpGoalPage = (props) => {
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />
-        </p>
+        </Body>
       </form>
-      <CarouselButton
-        type="primary"
-        onClick={handleValues}
-        isFilled
-        key="button2"
-      >
-        Next
-      </CarouselButton>
-    </>
+      <ButtonsContainer>
+        <CarouselButton
+          type="primary"
+          onClick={handleValues}
+          isFilled
+          key="button2"
+        >
+          Next
+        </CarouselButton>
+      </ButtonsContainer>
+    </NewChallengeLayout>
   );
 };
 
