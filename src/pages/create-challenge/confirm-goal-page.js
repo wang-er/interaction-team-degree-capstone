@@ -5,9 +5,32 @@ import { Button } from "../../components/base/buttons";
 import { ButtonsContainer } from "../onboarding/onboarding";
 import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
+import { H3, H4, Body } from "../../components/base/fonts";
+import { CloseButton } from "@chakra-ui/react";
+import { LayoutDiv } from "../../components/layout";
+import { darkPurple } from "../../components/base/colors";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
+`;
+
+export const NewChallengeLayout = styled(LayoutDiv)`
+  z-index: 10000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+  justify-content: center;
+`;
+
+export const ButtonsContainer1 = styled(ButtonsContainer)`
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 const ConfirmGoalPage = (props) => {
@@ -42,26 +65,27 @@ const ConfirmGoalPage = (props) => {
   };
 
   return (
-    <>
-      {console.log(
-        `reward is ${props.reward} and moneyAmount ${props.moneyAmount}`
-      )}
-      <h1 class="create-challenge-title">Confirm your goal.</h1>
-      <p class="create-challenge-text">
+    <NewChallengeLayout type="plain">
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
+      <H3>Confirm your goal.</H3>
+      <Body>
         Make sure all your info is correct, then you can set up your payment
         method and deposit your money into your piggybank.
-      </p>
-      <h1 class="create-challenge-title">Your goal.</h1>
-      <h2>
-        I want to {props.challengeName} {props.frequency} times a{" "}
+      </Body>
+      <H4 color={darkPurple}>Your goal.</H4>
+      <Body>
+        I want to {props.challengeName} {"\n"} {props.frequency} times a{" "}
         {props.duration} by {""}
         {moment(props.endDate).format("MM/DD/YYYY")}
-      </h2>
-      <h1 class="create-challenge-title">Your reward.</h1>
-      <h2>
-        I will {props.reward} with ${props.moneyAmount}{" "}
-      </h2>
-      <ButtonsContainer key="carousel">
+      </Body>
+      <H4 color={darkPurple}>Your reward.</H4>
+      <Body>
+        I will {props.reward}
+        {"\n"} with ${props.moneyAmount}{" "}
+      </Body>
+      <ButtonsContainer1 key="carousel">
         <CarouselButton
           type="secondary"
           key="button1"
@@ -72,8 +96,8 @@ const ConfirmGoalPage = (props) => {
         <CarouselButton type="primary" key="button2" onClick={wrapper}>
           Confirm
         </CarouselButton>
-      </ButtonsContainer>
-    </>
+      </ButtonsContainer1>
+    </NewChallengeLayout>
   );
 };
 

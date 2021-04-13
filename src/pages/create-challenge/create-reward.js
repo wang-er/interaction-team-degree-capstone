@@ -3,9 +3,32 @@ import Picture from "../../components/gallery";
 import styled from "styled-components";
 import { Button } from "../../components/base/buttons";
 import { ButtonsContainer } from "../onboarding/onboarding";
+import { LayoutDiv } from "../../components/layout";
+import { H3, Body } from "../../components/base/fonts";
+import { Input } from "../../components/base/forms";
+import { CloseButton } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
+`;
+
+export const NewChallengeLayout = styled(LayoutDiv)`
+  z-index: 10000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+  justify-content: center;
+`;
+
+export const ButtonsContainer1 = styled(ButtonsContainer)`
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 const CreateRewardPage = (props) => {
@@ -37,17 +60,20 @@ const CreateRewardPage = (props) => {
   };
 
   return (
-    <>
-      <h1 class="create-challenge-title">Let’s motivate you with a reward.</h1>
-      <p class="create-challenge-text">
+    <NewChallengeLayout type="plain">
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
+      <H3>Let’s motivate you with a reward.</H3>
+      <Body>
         Specify a reward and how much money you will spend on it. You can also
         input $0 for a non-monetary reward.
-      </p>
+      </Body>
       <Picture />
       <form>
-        <p>
+        <Body>
           I will{" "}
-          <input
+          <Input
             type="text"
             name="reward-name"
             onChange={handleInputChange("reward")}
@@ -55,16 +81,16 @@ const CreateRewardPage = (props) => {
           {"\n"}
           {"\n"}
           with $
-          <input
+          <Input
             type="text"
             size="8"
             name="money-amount"
             onChange={handleInputChange("moneyAmount")}
           />
           {"\n"}
-        </p>
+        </Body>
       </form>
-      <ButtonsContainer>
+      <ButtonsContainer1>
         <CarouselButton
           key="button1"
           type="secondary"
@@ -75,8 +101,8 @@ const CreateRewardPage = (props) => {
         <CarouselButton type="primary" key="button2" onClick={handleValues}>
           Next
         </CarouselButton>
-      </ButtonsContainer>
-    </>
+      </ButtonsContainer1>
+    </NewChallengeLayout>
   );
 };
 
