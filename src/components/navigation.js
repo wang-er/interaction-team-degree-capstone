@@ -41,7 +41,7 @@ const Navigation = ({location}) => {
       <MenuItem to="/home" location={isHighlighted("home")}>
         <GoalsSVG isHighlighted={isHighlighted("home")}/>
         </MenuItem>
-      <MenuItem to="/" location={isHighlighted("wallet")}> 
+      <MenuItem to="/wallet" location={isHighlighted("wallet")}> 
       <WalletSVG isHighlighted={isHighlighted("wallet")}/>
       </MenuItem>
       <MenuItem to="/settings" location={isHighlighted("settings")}>
