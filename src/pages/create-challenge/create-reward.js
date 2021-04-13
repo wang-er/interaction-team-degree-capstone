@@ -60,7 +60,7 @@ const CreateRewardPage = (props) => {
   };
 
   return (
-    <NewChallengeLayout type="plain">
+    <NewChallengeLayout type="plain" style={{ width: "100vw" }}>
       <Link to={{ pathname: "/home" }}>
         <CloseButton class="close-button" size="md" paddingLeft="350px" />
       </Link>

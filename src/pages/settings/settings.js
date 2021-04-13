@@ -16,7 +16,7 @@ export const Body1 = styled(Body)`
 class SettingsPage extends React.Component {
   render() {
     return (
-      <Layout location={this.props.location}>
+      <Layout location="settings">
         <HeaderContainer>
           <H1>Settings</H1>
         </HeaderContainer>

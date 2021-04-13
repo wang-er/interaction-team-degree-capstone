@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { LayoutDiv } from "../../components/layout";
 import { H3, Body } from "../../components/base/fonts";
 import { LoginButton, HyperLink, Button } from "../../components/base/buttons";
-import { Input } from "../../components/base/forms";
+import { Input, Select } from "../../components/base/forms";
 import { CloseButton } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -77,10 +77,12 @@ const SetUpGoalPage = (props) => {
   };
 
   return (
-    <NewChallengeLayout type="plain">
-      <Link to={{ pathname: "/home" }}>
-        <CloseButton class="close-button" size="md" paddingLeft="350px" />
-      </Link>
+    <NewChallengeLayout type="plain" style={{ width: "100vw" }}>
+      <div style={{ position: "absolute", top: "10px", right: "20px" }}>
+        <Link to={{ pathname: "/home" }}>
+          <CloseButton class="close-button" size="md" paddingLeft="350px" />
+        </Link>
+      </div>
 
       <H3 class="create-challenge-title">Let’s set up a goal.</H3>
       <Body>Swipe through some ideas if you can’t think of anything.</Body>
@@ -102,7 +104,7 @@ const SetUpGoalPage = (props) => {
             onChange={(e) => setChallengeFrequency(e.target.value)}
           />{" "}
           times a{" "}
-          <select
+          <Select
             style={{ border: "1px solid #B5B5B5" }}
             id="frequency-options"
             name="frequency-options"
@@ -111,7 +113,7 @@ const SetUpGoalPage = (props) => {
             <option>day</option>
             <option selected="selected">week</option>
             <option>month</option>
-          </select>
+          </Select>
           {"\n"}
           {"\n"}
           My ideal end date is: {"\n"}
