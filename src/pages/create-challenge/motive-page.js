@@ -3,9 +3,32 @@ import { Textarea } from "@chakra-ui/react";
 import styled from "styled-components";
 import { Button } from "../../components/base/buttons";
 import { ButtonsContainer } from "../onboarding/onboarding";
+import { H3, Body } from "../../components/base/fonts";
+import { Input } from "../../components/base/forms";
+import { CloseButton } from "@chakra-ui/react";
+import { LayoutDiv } from "../../components/layout";
+import { Link } from "react-router-dom";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
+`;
+
+export const NewChallengeLayout = styled(LayoutDiv)`
+  z-index: 10000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px;
+  justify-content: center;
+`;
+
+export const ButtonsContainer1 = styled(ButtonsContainer)`
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
 
 const MotivePage = (props) => {
@@ -25,20 +48,21 @@ const MotivePage = (props) => {
     props.sendDataToParent(1, "index");
   };
   return (
-    <>
-      <h1 class="create-challenge-title">
-        Why do you want to accomplish this goal?
-      </h1>
-      <p class="create-challenge-text">
+    <NewChallengeLayout type="plain">
+      <Link to={{ pathname: "/home" }}>
+        <CloseButton class="close-button" size="md" paddingLeft="350px" />
+      </Link>
+      <H3>Why do you want to accomplish this goal?</H3>
+      <Body>
         Thinking about your motive will help you stick with your goal!
-      </p>
+      </Body>
       <Textarea
         colorScheme="whiteAlpha"
         width="90%"
         placeholder="Write as much (or as little) as you want."
         onChange={handleInputChange}
       />
-      <ButtonsContainer key="carousel">
+      <ButtonsContainer1>
         <CarouselButton
           key="button1"
           type="secondary"
@@ -49,8 +73,8 @@ const MotivePage = (props) => {
         <CarouselButton type="primary" key="button2" onClick={handleValues}>
           Next
         </CarouselButton>
-      </ButtonsContainer>
-    </>
+      </ButtonsContainer1>
+    </NewChallengeLayout>
   );
 };
 

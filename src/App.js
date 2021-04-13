@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/navigation";
 import AccountPage from "./pages/account";
 import FAQPage from "./pages/faq";
-import SettingsPage from "./pages/settings";
+import SettingsPage from "./pages/settings/settings";
 import { db } from "./config";
 import LandingPage from "./pages/onboarding/landing";
 import OnboardingPage from "./pages/onboarding/onboarding";
@@ -101,25 +101,23 @@ function App() {
             <FAQPage />
           </Route>
           <Route path="/settings">
-            {/* <TestList />
-            <ImageUpload /> */}
-            <FAQPage />
-          </Route>
-          <Route path="/home">
-            <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
-          </Route>
-          <Route path="/piggy-completion" component={PiggyBankPage}>
-          </Route>
-           <Route path="/create-challenge">
+                <SettingsPage />
+              </Route>
+              <Route path="/home">
+                <HomePage onMapUpdate={updateMap} user={user} userID={userID} />
+              </Route>
+              <Route path="/piggy-completion" component={PiggyBankPage}></Route>
+              <Route path="/create-challenge">
                 <CreateChallengePage userID={userID} />
               </Route>
-          <Route path="/">
-            <LandingPage/>
-          </Route>
-        </Switch>
-      </div>
-    </Router>}
-  </>
+              <Route path="/">
+                <LandingPage />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      }
+    </>
   );
 }
 
