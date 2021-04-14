@@ -32,6 +32,24 @@ export const ButtonsContainer = styled.div`
   justify-content: space-evenly;
 `;
 
+// export const DatePickerr = styled.input`
+//   ::placeholder {
+//     color: #6a6a6a;
+//   }
+//   box-shadow: ${({ shadowed }) =>
+//     shadowed ? "5px 7px 10px #8580801A" : "none"};
+
+//   font-weight: 400;
+//   font-family: "Work Sans", sans-serif;
+//   font-size: 14px;
+//   padding: ${(props) => (props.small ? "6px 15px" : "12px 15px")};
+//   border-radius: 5px;
+//   // margin: 10px;
+//   text-decoration: none;
+//   width: ${(props) => (props.type == "checkbox" ? "30px" : "initial")};
+//   height: ${(props) => (props.type == "checkbox" ? "30px" : "inital")};
+// `;
+
 const SetUpGoalPage = (props) => {
   const [challengeName, setChallengeName] = React.useState("");
   const [frequency, setChallengeFrequency] = React.useState("");
@@ -77,15 +95,23 @@ const SetUpGoalPage = (props) => {
   };
 
   return (
-    <NewChallengeLayout type="plain" style={{ width: "100vw" }}>
+    <NewChallengeLayout type="plain">
+      {/* // style={{ width: "100vw" }} */}
       <div style={{ position: "absolute", top: "10px", right: "20px" }}>
         <Link to={{ pathname: "/home" }}>
-          <CloseButton class="close-button" size="md" paddingLeft="350px" />
+          <CloseButton
+            class="close-button"
+            size="lg"
+            paddingLeft="350px"
+            paddingRight="15px"
+          />
         </Link>
       </div>
-
-      <H3 class="create-challenge-title">Let’s set up a goal.</H3>
-      <Body>Swipe through some ideas if you can’t think of anything.</Body>
+      <H3 style={{ marginLeft: "-40px" }}>Let’s set up a goal.</H3>
+      <br></br>
+      <Body style={{ marginLeft: "40px", marginRight: "30px" }}>
+        Swipe through some ideas if you can’t think of anything.
+      </Body>
       <Picture />
       <form>
         <Body>
@@ -105,7 +131,11 @@ const SetUpGoalPage = (props) => {
           />{" "}
           times a{" "}
           <Select
-            style={{ border: "1px solid #B5B5B5" }}
+            style={{
+              border: "1px solid #B5B5B5",
+              backgroundColor: "white",
+              fontSize: "medium",
+            }}
             id="frequency-options"
             name="frequency-options"
             onChange={(d) => setDuration(d.target.value)}
@@ -119,6 +149,12 @@ const SetUpGoalPage = (props) => {
           My ideal end date is: {"\n"}
           {"\n"}
           <DatePicker
+            id="date-picker"
+            style={{
+              border: "1px solid #B5B5B5",
+              height: "40px",
+              borderRadius: "5px",
+            }}
             selected={endDate}
             onChange={(date) => setEndDate(date)}
           />

@@ -4,6 +4,7 @@ import { H1, Body } from "../../components/base/fonts";
 import { purple, red } from "../../components/base/colors";
 import { HeaderContainer } from "../home";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Body1 = styled(Body)`
   border-style: solid;
@@ -31,7 +32,9 @@ class SettingsPage extends React.Component {
         <br></br>
         <Body1 color={red}>Emergency Transfer</Body1>
         <br></br>
-        <Body1 color={purple}>Sign Out</Body1>
+        <Link to={{ pathname: "/" }}>
+          <Body1 color={purple}>Sign Out</Body1>
+        </Link>
       </Layout>
     );
   }

@@ -49,17 +49,27 @@ const MotivePage = (props) => {
   };
   return (
     <NewChallengeLayout type="plain">
-      <Link to={{ pathname: "/home" }}>
-        <CloseButton class="close-button" size="md" paddingLeft="350px" />
-      </Link>
+      <div style={{ position: "absolute", top: "10px", right: "20px" }}>
+        <Link to={{ pathname: "/home" }}>
+          <CloseButton
+            class="close-button"
+            size="lg"
+            paddingLeft="350px"
+            paddingRight="15px"
+          />
+        </Link>
+      </div>
       <H3>Why do you want to accomplish this goal?</H3>
+      <br></br>
       <Body>
         Thinking about your motive will help you stick with your goal!
       </Body>
+      <br></br>
       <Textarea
+        style={{ background: "white", height: "300px" }}
         colorScheme="whiteAlpha"
         width="90%"
-        placeholder="Write as much (or as little) as you want."
+        placeholder="&#13;&#10;Write as much (or as little) as you want."
         onChange={handleInputChange}
       />
       <ButtonsContainer1>

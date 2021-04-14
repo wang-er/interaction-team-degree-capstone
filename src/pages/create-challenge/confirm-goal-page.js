@@ -10,6 +10,7 @@ import { CloseButton } from "@chakra-ui/react";
 import { LayoutDiv } from "../../components/layout";
 import { darkPurple } from "../../components/base/colors";
 import { Link } from "react-router-dom";
+import EditIcon from "../../icons/Edit.svg";
 
 export const CarouselButton = styled(Button)`
   margin: 10px 10px;
@@ -44,19 +45,20 @@ const ConfirmGoalPage = (props) => {
 
   // Create official challenge object and send to Firebase
   const sendChallengeToFirebase = () => {
-    db.ref("challenges/" + props.challengeID).set({
-      id: props.challengeID,
-      userID: props.userID,
-      title: props.challengeName,
-      // frequency: props.frequency,
-      // duration: props.duration,
-      // endDate: props.endDate,
-      reward: props.reward,
-      moneyAmount: props.moneyAmount,
-      motive: props.motive,
-      currentDay: props.currentDay,
-      totalDays: props.totalDays,
-    });
+    if (props.challengeName) {
+      db.ref("challenges/" + props.challengeID).set({
+        id: props.challengeID,
+        userID: props.userID,
+        title: props.challengeName,
+        reward: props.reward,
+        moneyAmount: props.moneyAmount,
+        motive: props.motive,
+        currentDay: props.currentDay,
+        totalDays: props.totalDays,
+      });
+    } else {
+      return;
+    }
   };
 
   const wrapper = () => {
@@ -66,25 +68,51 @@ const ConfirmGoalPage = (props) => {
 
   return (
     <NewChallengeLayout type="plain">
-      <Link to={{ pathname: "/home" }}>
-        <CloseButton class="close-button" size="md" paddingLeft="350px" />
-      </Link>
-      <H3>Confirm your goal.</H3>
+      <div style={{ position: "absolute", top: "10px", right: "20px" }}>
+        <Link to={{ pathname: "/home" }}>
+          <CloseButton
+            class="close-button"
+            size="lg"
+            paddingLeft="350px"
+            paddingRight="15px"
+          />
+        </Link>
+      </div>
+      <H3 style={{ alignSelf: "normal" }}>Confirm your goal.</H3>
+      <br></br>
       <Body>
         Make sure all your info is correct, then you can set up your payment
         method and deposit your money into your piggybank.
       </Body>
-      <H4 color={darkPurple}>Your goal.</H4>
-      <Body>
-        I want to {props.challengeName} {"\n"} {props.frequency} times a{" "}
-        {props.duration} by {""}
-        {moment(props.endDate).format("MM/DD/YYYY")}
-      </Body>
-      <H4 color={darkPurple}>Your reward.</H4>
-      <Body>
-        I will {props.reward}
-        {"\n"} with ${props.moneyAmount}{" "}
-      </Body>
+      <br></br>
+      <br></br>
+      <div id="goal-conf" style={{ alignSelf: "flex-start" }}>
+        <div style={{ display: "flex" }}>
+          <H4 color={darkPurple} style={{ paddingRight: "10px" }}>
+            Your Goal{" "}
+          </H4>
+          <img src={EditIcon} />
+        </div>
+        <br></br>
+        <Body>
+          I want to {props.challengeName} <br></br>
+          {"\n"} {props.frequency} times a {props.duration} by {""}
+          {moment(props.endDate).format("MM/DD/YYYY")}
+        </Body>
+        <br></br>
+        <br></br>
+        <div style={{ display: "flex" }}>
+          <H4 color={darkPurple} style={{ paddingRight: "10px" }}>
+            Your Reward{" "}
+          </H4>
+          <img src={EditIcon} />
+        </div>
+        <br></br>
+        <Body>
+          I will {props.reward} <br></br>
+          {"\n"} with ${props.moneyAmount}{" "}
+        </Body>
+      </div>
       <ButtonsContainer1 key="carousel">
         <CarouselButton
           type="secondary"

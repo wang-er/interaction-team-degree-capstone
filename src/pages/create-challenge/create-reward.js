@@ -61,10 +61,18 @@ const CreateRewardPage = (props) => {
 
   return (
     <NewChallengeLayout type="plain" style={{ width: "100vw" }}>
-      <Link to={{ pathname: "/home" }}>
-        <CloseButton class="close-button" size="md" paddingLeft="350px" />
-      </Link>
+      <div style={{ position: "absolute", top: "10px", right: "20px" }}>
+        <Link to={{ pathname: "/home" }}>
+          <CloseButton
+            class="close-button"
+            size="lg"
+            paddingLeft="350px"
+            paddingRight="15px"
+          />
+        </Link>
+      </div>
       <H3>Let’s motivate you with a reward.</H3>
+      <br></br>
       <Body>
         Specify a reward and how much money you will spend on it. You can also
         input $0 for a non-monetary reward.
