@@ -5,6 +5,14 @@ import styled from "styled-components";
 import { Button, HyperLink } from '../../components/base/buttons';
 import { Body, H3 } from '../../components/base/fonts';
 import { purple, teal } from '../../components/base/colors';
+import Image1 from '../../icons/onboardingAsset0.png';
+import Image2 from '../../icons/onboardingAsset1.png';
+import Image3 from '../../icons/onboardingAsset2.png';
+import Image4 from '../../icons/onboardingAsset3.png';
+import Image5 from '../../icons/onboardingAsset4.png';
+
+
+
 
 import { LayoutDiv } from '../../components/layout';
 
@@ -70,9 +78,9 @@ export const OnboardingTextBox = styled.div`
 `
 
 export const DemoImage = styled.img`
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    // border-radius: 50%;
+    // width: 150px;
+    height: 200px;
     object-fit: cover;
 `
 
@@ -142,31 +150,31 @@ const OnboardingPage = () => {
             title: "Welcome to Centiv!",
             content:
                 "Feeling unmotivated? Centiv is here to help. Centiv lets you set a goal, document progress, and provide yourself with a reward. Think of Centiv as a motivational piggybank.",
-            imageURL: "https://cdn.discordapp.com/emojis/623731761234575370.png"
+            imageURL: Image1
         },
         {
             title: "Let’s get started: \n Meet Ashley",
             content:
                 "Ashley wants to use Centiv to eat better. She challenges herself to cook 30 healthy meals.",
-            imageURL: "https://cdn.discordapp.com/emojis/563971267720642581.png"
+            imageURL: Image2
         },
         {
             title: "Setting a Reward",
             content:
                 "To motivate her, she puts $50 into Centiv. She plans on using the money to buy a new pair of shoes as a reward.",
-            imageURL: "https://cdn.discordapp.com/emojis/487275835967930389.png?v=1"
+            imageURL: Image3
         },
         {
             title: "Document Progress",
             content:
-                "In order to get back her $50, she needs to document herself cooking 30 healthy meals. She can take pictures, videos, or type an entry once a day. \n \n \n \n Note: Don’t worry, your money will never disappear. You’ll always have a chance to earn it back.",
-            imageURL: "https://cdn.discordapp.com/emojis/666864594999836684.png?v=1"
+                "In order to get back her $50, she needs to document herself cooking 30 healthy meals. She can take pictures, videos, or type an entry once a day. \nNote: Don’t worry, your money will never disappear. You’ll always have a chance to earn it back.",
+            imageURL: Image4
         },
         {
             title: "Goal Complete!",
             content:
                 "Ashley documents her last entry and breaks her piggy bank! The money is transferred back to her and she buys new shoes to reward herself.",
-            imageURL: "https://cdn.vox-cdn.com/thumbor/_C0nMyVPwJSQ2rESIJD4O5Y1J-c=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/13315879/npcmeme.jpg"
+            imageURL: Image5
         }
 
     ];
@@ -197,8 +205,7 @@ const OnboardingPage = () => {
                 <SlideBox>
                     <DemoImage src={carouselSlidesData[index].imageURL} />
                     <OnboardingTextBox>
-                        <H3>{carouselSlidesData[index].title}</H3>
-                        <br/>
+                        <H3 style={{marginBottom: "10px"}}>{carouselSlidesData[index].title}</H3>
                         <Body>{carouselSlidesData[index].content}</Body>
                         {(maxIndex === index) &&
                         <FAQButton>

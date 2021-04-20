@@ -4,13 +4,15 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from "styled-components";
 import { Button, SmallButton } from '../components/base/buttons';
 import { white } from '../components/base/colors';
-import { Body, BodySmall, H3 } from '../components/base/fonts';
+import { Body, BodySmall, H3, H1 } from '../components/base/fonts';
 import { Input } from '../components/base/forms';
 import { LayoutDiv } from '../components/layout';
 import EditIcon from '../icons/Edit2.svg'
 import CardIcon from '../icons/Card.svg'
 import BackgroundImage from '../icons/CompletedNode.png'
-import BackIcon from '../icons/Back.svg'
+import GoalComplete from '../icons/goal-complete.gif'
+import PiggyCompleted from '../icons/PiggyCompleted.svg'
+import BackIcon from '../icons/X.png'
 
 
 
@@ -38,11 +40,40 @@ export const SlideBox = styled.div`
     }
 `
 
+export const SlideBoxMove = styled(SlideBox)` 
+    // enter from
+    &.fade-enter {
+        opacity: 0;
+        position: fixed;
+        transform: translateX(100vw);
+        }
+    
+        // enter to
+        &.fade-enter-active {
+        opacity: 1;
+        position: fixed;
+        transform: translateX(100vw);
+        }
+    
+        // exit from
+        &.fade-exit {
+        opacity: 1;
+        transform: translateX(-100vw);
+        }
+    
+        // exit to 
+        &.fade-exit-active {
+        opacity: 0;
+        transform: translateX(-100vw);
+    
+        }
+        `
+
 export const DemoImage = styled.img`
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+    // border-radius: 50%;
+    width: 136px;
+    height: 200px;
+    // object-fit: cover;
 `
 
 export const CarouselButton = styled.button` 
@@ -86,13 +117,13 @@ export const EditImg = styled.img`
 export const AwardDiv = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: auto;
-    margin-bottom: 50px;
+    // margin-top: auto;
+    // margin-bottom: 50px;
 `
 
 export const TapMessage = styled(Body)`
     position: absolute;
-    margin-top: -220px;
+    margin-top: -280px;
 `
 
 
@@ -126,32 +157,51 @@ export const BackButton = styled(Link)`
     z-index: 1000;
 `
 
+export const NodeList = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    
+    div {
+        margin-right: 15px;
+    }
+`
+
+
+
 
 
 
 const PiggyBankPage = () => {
     const history = useHistory();
     const data = history.location.state?.data
+    const [gif, setGif] = React.useState(GoalComplete);
+    const [loaded, setLoaded] = React.useState(GoalComplete);
+
     // Images of piggy bank state
     const carouselSlidesData = [
         {
             content: "Tap the piggy bank to break it!",
-            imageURL: "https://cdn.discordapp.com/emojis/623731761234575370.png"
+            imageURL: PiggyCompleted
         },
         {
             content: " ",
-            imageURL: "https://cdn.discordapp.com/emojis/563971267720642581.png"
-        },
-        {
-            content: " ",
-            imageURL: "https://cdn.discordapp.com/emojis/487275835967930389.png?v=1"
+            imageURL: loaded
         }
     ];
 
+    const reloadGif = () => {
+        setLoaded('');
+        setTimeout(() => {
+          setLoaded(gif);
+        }, 0)
+      }
+
     // const maxIndex = carouselSlidesData.length - 1;
-    const maxIndex = 5 - 1;
+    const maxIndex = 4 - 1;
     const [index, setIndex] = React.useState(0);
     const rightClick = () => {
+        reloadGif()
         if (index < maxIndex) {
             setIndex(index + 1);
         }
@@ -161,16 +211,38 @@ const PiggyBankPage = () => {
     }
 
     const renderNode = () => {
-        return  <NodeContainer>
-        <ButtonCircle img={BackgroundImage}>
-          {/* {data.state === "current" && (
-            <EntryPopupMenu
-              challengeID={challengeID}
-              entryID={data.id}
-            ></EntryPopupMenu>
-          )} */}
-        </ButtonCircle>
-        </NodeContainer>
+        return <NodeList>
+            <NodeContainer>
+                <ButtonCircle img={BackgroundImage}>
+                    {/* {data.state === "current" && (
+                <EntryPopupMenu
+                challengeID={challengeID}
+                entryID={data.id}
+                ></EntryPopupMenu>
+            )} */}
+                </ButtonCircle>
+            </NodeContainer>
+            <NodeContainer>
+                <ButtonCircle img={BackgroundImage}>
+                    {/* {data.state === "current" && (
+                <EntryPopupMenu
+                challengeID={challengeID}
+                entryID={data.id}
+                ></EntryPopupMenu>
+            )} */}
+                </ButtonCircle>
+            </NodeContainer>
+            <NodeContainer>
+                <ButtonCircle img={BackgroundImage}>
+                    {/* {data.state === "current" && (
+                <EntryPopupMenu
+                challengeID={challengeID}
+                entryID={data.id}
+                ></EntryPopupMenu>
+            )} */}
+                </ButtonCircle>
+            </NodeContainer>
+        </NodeList>
     }
 
     // const data = this.props.history.location.state?.data
@@ -181,19 +253,21 @@ const PiggyBankPage = () => {
             <DemoImage src={carouselSlidesData[0].imageURL} onClick={rightClick} />
         </SlideBox>
         <SlideBox id="2" isOpen={isOpen(2)}>
-            <DemoImage src={carouselSlidesData[1].imageURL} onClick={rightClick} />
+            <DemoImage src={carouselSlidesData[1].imageURL} style={{ objectFit: "cover" }} onClick={rightClick} />
         </SlideBox>
-        <SlideBox id="3" isOpen={isOpen(3)}>
-            <DemoImage src={carouselSlidesData[2].imageURL} onClick={rightClick} />
-        </SlideBox>
-        <SlideBox id="4" isOpen={isOpen(4)}>
+        <TransitionGroup>
+        <CSSTransition
+                timeout={150}
+                classNames="fade">
+        <SlideBoxMove id="4" isOpen={isOpen(3)}>
             {/* <img src="https://cdn.discordapp.com/emojis/623731761234575370.png"/> */}
             <AwardDiv>
-                <div style={{marginBottom: "30px", alignSelf: "center"}}>
+                {/* <div style={{marginBottom: "30px", alignSelf: "center"}}>
                     <DemoImage src="https://cdn.discordapp.com/emojis/623731761234575370.png" />
-                </div>
+                </div> */}
                 <div>
-                    <Body color={white}>Congrats! You’ve successfully completed your goal. Go ahead and treat yourself with your reward:</Body>
+                    <H1 color={white}>Congrats!</H1>
+                    <Body color={white}> You’ve successfully completed your goal. Go ahead and treat yourself with your reward:</Body>
                     <br />
                     <Body color={white}>"{data.reward}"</Body>
                 </div>
@@ -204,36 +278,36 @@ const PiggyBankPage = () => {
                     <EditImg src={EditIcon} />
                 </PaymentInput>
                 <br />
-                <div style={{alignSelf: "center"}}>
+                <div style={{ alignSelf: "center" }}>
                     <Button onClick={rightClick}>
                         Claim Reward
                     </Button>
                 </div>
 
             </AwardDiv>
-        </SlideBox>
-        <SlideBox id="5" isOpen={isOpen(5)}>
+        </SlideBoxMove>
+        </CSSTransition>
+        </TransitionGroup>
+        <SlideBox id="5" isOpen={isOpen(4)}>
             <div>
+                <H3 color={white}>What's next?</H3>
+                <Body color={white}>You can still view this goal under Past Goals.</Body>
+                <br />
+                <BodySmall color={white}>Watch recap of your goal:</BodySmall>
+                <div>
+                    {renderNode()}
+                </div>
+                <br />
+                <BodySmall color={white}>Start new goal:</BodySmall>
+                <br />
 
-            
-            <H3 color={white}>What's next?</H3>
-            <Body color={white}>You can still view this goal under Past Goals.</Body>
-            <br/>
-            <BodySmall color={white}>Watch recap of your goal:</BodySmall>
-            <div>
-                {renderNode()}
-            </div>
-            <br/>
-            <BodySmall color={white}>Start new goal:</BodySmall>
-            <br/>
-
-            <SmallButton>
-            <Link to={{ pathname: "/create-challenge" }}>
-                    + Create
+                <SmallButton>
+                    <Link to={{ pathname: "/create-challenge" }}>
+                        + Create
                         </Link>
-            </SmallButton>
-                  <BackButton to="/home">
-                    <img src={BackIcon}/>
+                </SmallButton>
+                <BackButton to="/home">
+                    <img src={BackIcon} />
                 </BackButton>
             </div>
         </SlideBox>
