@@ -163,7 +163,7 @@ const PaymentDetailsPage = (props) => {
       <H3 style={{ alignSelf: "end" }}>Payment Details</H3>
       <CurrentBalanceDiv>
         <Body>Deposit Amount</Body>
-        <TotalMoneyDiv>
+        <TotalMoneyDiv style={{ marginLeft: "150px" }}>
           {props.moneyAmount ? props.moneyAmount : `$0`}
         </TotalMoneyDiv>
         <CurrentBalanceLine />
@@ -179,7 +179,7 @@ const PaymentDetailsPage = (props) => {
           <img src="https://sm.pcmag.com/pcmag_in/review/p/paypal/paypal_mb8k.png" />
         </LinkedAccountsButton>
       </LinkedAccountsDiv>
-      <PaymentMethodsDiv>
+      <PaymentMethodsDiv style={{ alignSelf: "normal", marginBottom: "70px" }}>
         <Body>Cardholder's Name</Body>
         <PaymentInput>
           <Input readonly shadowed value="Cardholder's Name" />
@@ -190,26 +190,52 @@ const PaymentDetailsPage = (props) => {
           <Input readonly shadowed value="0000 0000 0000 0000" />
         </PaymentInput>
         <br></br>
-        <div style={{ display: "row" }}>
+        <div style={{ display: "flex" }}>
           <Body>Exp. Date</Body>
-          <Input readonly shadowed value="MM/YYYY" />
-          <Body>CVC</Body>
-          <Input readonly shadowed value="CVC" />
+          <Body style={{ marginLeft: "40px" }}>CVC</Body>
         </div>
-        <Input shadowed type="checkbox" placeholder="XXX-XXX-XXXX" />
+        <div style={{ display: "flex", marginBottom: "20px" }}>
+          <Input
+            style={{ width: "30%", marginRight: "20px" }}
+            readonly
+            shadowed
+            value="MM/YYYY"
+          />
+          <Input style={{ width: "18%" }} readonly shadowed value="CVC" />
+        </div>
+        <div style={{ display: "flex" }}>
+          <Input
+            style={{
+              marginRight: "10px",
+              appearance: "inherit",
+              backgroundColor: "white",
+            }}
+            shadowed
+            type="checkbox"
+          />
+          <BodySmall style={{ paddingTop: "3px" }}>
+            Save Payment Method
+          </BodySmall>
+        </div>
       </PaymentMethodsDiv>
-      <Link to={{ pathname: "/deposit-completion" }}>
-        <CarouselButton
-          isFilled
+      <div style={{ display: "contents" }}>
+        <Link to={{ pathname: "/deposit-completion" }}>
+          <CarouselButton
+            isFilled
+            key="button2"
+            // onClick={() => alert("open animation here??")}
+          >
+            Confirm Payment
+          </CarouselButton>
+        </Link>
+        <HyperLink
+          style={{ positon: "relative" }}
+          isFilled="false"
           key="button2"
-          // onClick={() => alert("open animation here??")}
         >
-          Confirm Payment
-        </CarouselButton>
-      </Link>
-      <HyperLink style={{ positon: "relative" }} isFilled="false" key="button2">
-        Skip Payment
-      </HyperLink>
+          Skip Payment
+        </HyperLink>
+      </div>
       {/* </ButtonsContainer1> */}
     </NewChallengeLayout>
   );
