@@ -73,11 +73,11 @@ const CreateRewardPage = (props) => {
       </div>
       <H3>Let’s motivate you with a reward.</H3>
       <br></br>
-      <Body>
+      <Body style={{ marginBotom: "15px" }}>
         Specify a reward and how much money you will spend on it. You can also
         input $0 for a non-monetary reward.
       </Body>
-      <Picture />
+      <Picture isGoal={false} />
       <form>
         <Body>
           I will{" "}
