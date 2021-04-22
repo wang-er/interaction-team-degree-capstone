@@ -16,7 +16,7 @@ export const H2 = styled.h2`
 `;
 
 export const H3 = styled.h3`
-  font-family: "Work Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 30px;
   line-height: 40px;
 
