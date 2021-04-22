@@ -58,3 +58,11 @@ export const BodySmall = styled.p`
   font-weight: 400;
   color: ${(props) => (props.color ? props.color : darkPurple)};
 `;
+
+export const ModalTitleBold = styled.p`
+  font-family: "Work Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  color: ${(props) => (props.color ? props.color : darkPurple)};
+`;
