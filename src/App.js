@@ -18,6 +18,7 @@ import ImageUpload from "./components/imageUpload";
 import PiggyBankPage from "./pages/piggybankPage";
 import CreateChallengePage from "./pages/create-challenge/create-challenge";
 import WalletPage from "./pages/wallet";
+import DepositCompletionPage from "./pages/create-challenge/deposit-completion";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -69,38 +70,41 @@ function App() {
     setMapID(map);
   };
 
-  return (<> {isLoaded &&
-    <Router>
-      <div>
-        <Switch>
-        <Route path="/landing">
-            <LandingPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage onUserUpdate={updateUserID} />
-          </Route>
-          <Route path="/onboarding">
-            <OnboardingPage/>
-          </Route>
-          <Route path="/create-account">
-            <CreateAccountPage/>
-          </Route>
-          <Route path="/create-account-details">
-            <CreateAccountDetailsPage  onUserUpdate={updateUserID}/>
-          </Route>
-          <Route path="/map">
-            <MapPage ID={currentMapID} />
-          </Route>
-          <Route path="/wallet">
-            <WalletPage />
-          </Route>
-          <Route path="/account">
-            <AccountPage />
-          </Route>
-          <Route path="/faq">
-            <FAQPage />
-          </Route>
-          <Route path="/settings">
+  return (
+    <>
+      {" "}
+      {isLoaded && (
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/landing">
+                <LandingPage />
+              </Route>
+              <Route path="/login">
+                <LoginPage onUserUpdate={updateUserID} />
+              </Route>
+              <Route path="/onboarding">
+                <OnboardingPage />
+              </Route>
+              <Route path="/create-account">
+                <CreateAccountPage />
+              </Route>
+              <Route path="/create-account-details">
+                <CreateAccountDetailsPage onUserUpdate={updateUserID} />
+              </Route>
+              <Route path="/map">
+                <MapPage ID={currentMapID} />
+              </Route>
+              <Route path="/wallet">
+                <WalletPage />
+              </Route>
+              <Route path="/account">
+                <AccountPage />
+              </Route>
+              <Route path="/faq">
+                <FAQPage />
+              </Route>
+              <Route path="/settings">
                 <SettingsPage />
               </Route>
               <Route path="/home">
@@ -110,13 +114,17 @@ function App() {
               <Route path="/create-challenge">
                 <CreateChallengePage userID={userID} />
               </Route>
+              <Route
+                path="/deposit-completion"
+                component={DepositCompletionPage}
+              ></Route>
               <Route path="/">
                 <LandingPage />
               </Route>
             </Switch>
           </div>
         </Router>
-      }
+      )}
     </>
   );
 }
