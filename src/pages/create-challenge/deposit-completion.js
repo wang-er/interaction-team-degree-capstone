@@ -4,6 +4,8 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
 import { white } from "../../components/base/colors";
 import { Body, BodySmall, H2 } from "../../components/base/fonts";
+import { Button } from "../../components/base/buttons";
+
 import { LayoutDiv } from "../../components/layout";
 import BackgroundImage from "../../icons/CompletedNode.png";
 import GoalCreatedGIF from "../../icons/goal-created.gif";
@@ -126,7 +128,7 @@ const DepositCompletionPage = () => {
   return (
     <CompletionLayout type="map">
       <AwardDiv>
-        <div style={{ marginBottom: "30px", alignSelf: "center" }}>
+        <div style={{ alignSelf: "center" }}>
           <img src={GoalCreatedGIF} />
         </div>
         <div>
@@ -141,6 +143,9 @@ const DepositCompletionPage = () => {
             Congrats on your deposit!
           </H2>
           <br />
+        </div>
+        <div style={{ alignSelf: "center" }}>
+          <Button onClick={console.log("Start")}>Start Journey</Button>
         </div>
         <br />
         <br />
