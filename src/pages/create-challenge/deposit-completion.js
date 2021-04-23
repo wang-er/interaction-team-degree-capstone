@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
 import { white } from "../../components/base/colors";
@@ -120,10 +120,9 @@ export const BackButton = styled(Link)`
   z-index: 1000;
 `;
 
-const DepositCompletionPage = () => {
-  const history = useHistory();
-
-  // const data = this.props.history.location.state?.data
+const DepositCompletionPage = ({ onMapUpdate }) => {
+  const { mapID } = useParams();
+  console.log(`deposit completion params: ${mapID}`);
 
   return (
     <CompletionLayout type="map">
@@ -145,7 +144,12 @@ const DepositCompletionPage = () => {
           <br />
         </div>
         <div style={{ alignSelf: "center" }}>
-          <Button onClick={console.log("Start")}>Start Journey</Button>
+          <Link
+            to={{ pathname: `/map/${mapID}` }}
+            onClick={() => onMapUpdate(mapID)}
+          >
+            <Button>Start Journey</Button>
+          </Link>
         </div>
         <br />
         <br />

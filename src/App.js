@@ -19,6 +19,7 @@ import PiggyBankPage from "./pages/piggybankPage";
 import CreateChallengePage from "./pages/create-challenge/create-challenge";
 import WalletPage from "./pages/wallet";
 import DepositCompletionPage from "./pages/create-challenge/deposit-completion";
+import ConfirmGoalPage from "./pages/create-challenge/confirm-goal-page";
 
 function App() {
   const [user, setUser] = React.useState({});
@@ -92,7 +93,7 @@ function App() {
               <Route path="/create-account-details">
                 <CreateAccountDetailsPage onUserUpdate={updateUserID} />
               </Route>
-              <Route path="/map">
+              <Route path="/map/:currentMapID">
                 <MapPage ID={currentMapID} />
               </Route>
               <Route path="/wallet">
@@ -114,10 +115,9 @@ function App() {
               <Route path="/create-challenge">
                 <CreateChallengePage userID={userID} />
               </Route>
-              <Route
-                path="/deposit-completion"
-                component={DepositCompletionPage}
-              ></Route>
+              <Route path="/deposit-completion/:mapID">
+                <DepositCompletionPage onMapUpdate={updateMap} />
+              </Route>
               <Route path="/">
                 <LandingPage />
               </Route>

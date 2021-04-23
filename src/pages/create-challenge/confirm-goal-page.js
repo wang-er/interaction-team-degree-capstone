@@ -47,6 +47,7 @@ const ConfirmGoalPage = (props) => {
 
   let handleValues = () => {
     props.sendDataToParent(4, "index");
+    props.sendDataToParent(props.challengeID, "mapID");
   };
 
   let handleBackButton = () => {
@@ -55,6 +56,7 @@ const ConfirmGoalPage = (props) => {
 
   // Create official challenge object and send to Firebase
   const sendChallengeToFirebase = () => {
+    console.log(`sent firebase: ${props.challengeID}`);
     if (props.challengeName) {
       db.ref("challenges/" + props.challengeID).set({
         id: props.challengeID,

@@ -148,7 +148,7 @@ export const EditImg = styled.img`
 `;
 
 const PaymentDetailsPage = (props) => {
-  const [phone, setPhone] = useState("");
+  console.log(`payment details mapID: ${props.mapID}`);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   let handleValues = () => {
@@ -213,7 +213,7 @@ const PaymentDetailsPage = (props) => {
             textAlign="center"
             display="grid"
           >
-            <Link to={{ pathname: "/deposit-completion" }}>
+            <Link to={{ pathname: `/deposit-completion/${props.mapID}` }}>
               <Button style={{ marginBottom: "10px" }} type="danger">
                 Skip Payment
               </Button>
@@ -286,7 +286,7 @@ const PaymentDetailsPage = (props) => {
           </div>
         </PaymentMethodsDiv>
         <div style={{ display: "contents" }}>
-          <Link to={{ pathname: "/deposit-completion" }}>
+          <Link to={{ pathname: `/deposit-completion/${props.mapID}` }}>
             <CarouselButton isFilled key="button2">
               Confirm Payment
             </CarouselButton>
