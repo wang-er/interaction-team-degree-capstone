@@ -71,3 +71,10 @@ p {
 .close-button {
   float: right !important;
 }
+
+input#date-picker {
+  border: 1px solid #b5b5b5;
+  height: 45px;
+  border-radius: 5px;
+  padding-left: 5px;
+}

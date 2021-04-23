@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ConfirmGoalPage from "./confirm-goal-page";
 import CreateRewardPage from "./create-reward";
 import MotivePage from "./motive-page";
 import PaymentDetailsPage from "./payment-details-page";
 import SetUpGoalPage from "./setup-goal-page";
-import { db } from "../../config";
 
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -80,6 +78,7 @@ const CreateChallengePage = (props) => {
   // newly created challenge will start at 0
   const currentDay = 0;
   const [totalDays, setTotalDays] = React.useState("");
+  const [mapID, setMapID] = React.useState("");
 
   const sendDataToParent = (value, property) => {
     switch (property) {
@@ -102,6 +101,8 @@ const CreateChallengePage = (props) => {
         setMotive(value);
       case "index":
         setIndex(value);
+      case "mapID":
+        setMapID(value);
       default:
         console.log("unknown type");
     }
@@ -130,8 +131,13 @@ const CreateChallengePage = (props) => {
         totalDays={totalDays}
       />
     ),
-    4: <PaymentDetailsPage sendDataToParent={sendDataToParent} index={index} />,
-    // 5: <DepositAnimationPage />,
+    4: (
+      <PaymentDetailsPage
+        sendDataToParent={sendDataToParent}
+        mapID={mapID}
+        index={index}
+      />
+    ),
   };
 
   return <CreateChallengeLayout>{routes[index]}</CreateChallengeLayout>;
