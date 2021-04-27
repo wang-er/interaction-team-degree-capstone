@@ -95,7 +95,7 @@ const CreateAccountDetailsPage = ({onUserUpdate}) => {
                 }
                 db.ref('users/').push(newUser);
                 handlePhone();
-                history.push("/home");
+                history.push("/create-challenge");
             }
         });
     }

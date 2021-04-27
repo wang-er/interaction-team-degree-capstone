@@ -5,6 +5,8 @@ import CreateRewardPage from "./create-reward";
 import MotivePage from "./motive-page";
 import PaymentDetailsPage from "./payment-details-page";
 import SetUpGoalPage from "./setup-goal-page";
+import PlainBackground from "../../icons/Plain.png";
+
 
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -49,7 +51,8 @@ export const CarouselButton = styled.button`
 export const CarouselButtons = styled.div``;
 
 export const CreateChallengeLayout = styled.div`
-  background-color: #e0e0e0;
+  background-image: url(${PlainBackground});  
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
