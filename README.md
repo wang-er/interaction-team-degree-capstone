@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# Centiv
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Live Demo: https://centiv.netlify.app/**
 
-## Available Scripts
+Centiv is a motivational and goal documenting app that lets users wager their money as a motivator to accomplish their goal. After documenting enough days, whether it’s taking a photo or writing an entry, they’ll receive their money back and treat themselves to a reward. Think of this app like a piggy bank – you can put in money, but it’s hard to get it back. After some time or achievement, you can break the piggy bank and get your money back for a treat!
 
-In the project directory, you can run:
+## The team
+### Developers
+* Erin Wang
+* Harumi Jang
+### Designers
+* Melinda Yu
+* Eiry Lynch
 
-### `npm start`
+## Motivator
+People have reacted differently due to the COVID-19 pandemic. By being stuck at home, some people started to pick up old hobbies or start news ones as a means to cope. Others are stuck feeling demotivated, wanting to pick up activities but don’t have the push they need to start.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+We wanted a way to encourage people to start or continue these hobbies to create positive moments in a time of uncertainty and stress. How could we motivate people during a prolonged time of stress? Therefore, we created Centiv – an app that gives that initial push for users to continue their goals. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Key Audiences
+While our primary target audience was college students and people who primarily use their phone for social media, this app is appropriate for the general public. 
 
-### `npm test`
+## Tools
+* React.js – The backbone logic for our project
+* Styled Components – For implementing visuals from our hifidelity designs
+* Firebase – Our database to store users, goals, and entries
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Other links 
+* Process Book: https://uxfol.io/project/0359a92f/Centiv
+* Figma (hi-fidelity designs): https://www.figma.com/file/bXwJa3zQQgc3dll6iq4WXV?node-id=1108:3
+* **Live Demo: https://centiv.netlify.app/**
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
